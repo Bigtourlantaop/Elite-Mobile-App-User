@@ -1,12 +1,15 @@
 import React from "react";
-import { SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Image, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 
 const Register_Screen = ({navigation}) => {
 
     return (
         <SafeAreaView style={{flex:1, justifyContent:'center'}}>
-            <View style={{paddingHorizontal:25}}>
-              <Text style={{fontSize:50, color:'black', marginBottom:50}}>Register</Text>
+            <ScrollView showsVerticalScrollIndicator={false} style={{paddingHorizontal:25}}>
+              <View style={{alignItems:'center', margin: 40}}>
+                <Image source={require('../assets/image/Worklife.png')} style={{}}></Image>
+              </View>
+              <Text style={{fontSize:50, color:'black', marginBottom:40}}>Register</Text>
               <TextInput placeholder="Full name" style={styles.input} keyboardType="default" />
               <TextInput placeholder="Email" style={styles.input} keyboardType="email-address" />
               <TextInput placeholder="Password" style={styles.input} secureTextEntry={true} />
@@ -17,10 +20,10 @@ const Register_Screen = ({navigation}) => {
               <View style = {{flexDirection: 'row', justifyContent:'center', marginTop: 50}}>
                 <Text>Already registered? </Text>
                 <TouchableOpacity onPress={() => {navigation.goBack()}}>
-                    <Text style={{color:'blue'}}>Login</Text>
+                    <Text style={{color:'blue', marginBottom: 25}}>Login</Text>
                 </TouchableOpacity>
               </View>
-            </View>
+            </ScrollView>
         </SafeAreaView>
     );
 }
