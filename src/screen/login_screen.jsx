@@ -9,8 +9,14 @@ const Loginpage = ({navigation}) => {
                 <View style={{alignItems: 'center', marginBottom:50}}>
                     <Text style={{fontSize:90, color: '#222831'}}>E lite</Text>
                 </View>
-            <TextInput placeholder="Email" style={styles.input} keyboardType="email-address" />
-            <TextInput placeholder="Password" style={styles.input} secureTextEntry={true} />
+            <TextInput 
+            placeholder="Email" 
+            style={styles.input} 
+            keyboardType="email-address" />
+            <TextInput 
+            placeholder="Password" 
+            style={styles.input} 
+            secureTextEntry={true} />
             <TouchableOpacity onPress={() => {}} style={styles.loginbut}>
                 <Text style={{color: 'white'}}>Login</Text>
             </TouchableOpacity>

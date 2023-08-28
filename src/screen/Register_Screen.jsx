@@ -10,10 +10,22 @@ const Register_Screen = ({navigation}) => {
                 <Image source={require('../assets/image/Worklife.png')} style={{}}></Image>
               </View>
               <Text style={{fontSize:50, color:'black', marginBottom:40}}>Register</Text>
-              <TextInput placeholder="Full name" style={styles.input} keyboardType="default" />
-              <TextInput placeholder="Email" style={styles.input} keyboardType="email-address" />
-              <TextInput placeholder="Password" style={styles.input} secureTextEntry={true} />
-              <TextInput placeholder="Confirm Password" style={styles.input} secureTextEntry={true} />
+              <TextInput 
+              placeholder="Full name" 
+              style={styles.input} 
+              keyboardType="default" />
+              <TextInput 
+              placeholder="Email" 
+              style={styles.input} 
+              keyboardType="email-address" />
+              <TextInput 
+              placeholder="Password" 
+              style={styles.input} 
+              secureTextEntry={true} />
+              <TextInput 
+              placeholder="Confirm Password" 
+              style={styles.input} 
+              secureTextEntry={true} />
               <TouchableOpacity onPress={() => {}} style={styles.RegisBut}>
                 <Text style={{color: 'white', fontSize:23}}>Register</Text>
               </TouchableOpacity>
