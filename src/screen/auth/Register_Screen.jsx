@@ -7,7 +7,7 @@ const Register_Screen = ({navigation}) => {
         <SafeAreaView style={{flex:1, justifyContent:'center'}}>
             <ScrollView showsVerticalScrollIndicator={false} style={{paddingHorizontal:25}}>
               <View style={{alignItems:'center', margin: 40}}>
-                <Image source={require('../assets/image/Worklife.png')} style={{}}></Image>
+                <Image source={require('../../assets/image/Worklife.png')} style={{}}></Image>
               </View>
               <Text style={{fontSize:50, color:'black', marginBottom:40}}>Register</Text>
               <TextInput 
@@ -29,7 +29,7 @@ const Register_Screen = ({navigation}) => {
               <TouchableOpacity onPress={() => {}} style={styles.RegisBut}>
                 <Text style={{color: 'white', fontSize:23}}>Register</Text>
               </TouchableOpacity>
-              <View style = {{flexDirection: 'row', justifyContent:'center', marginTop: 50}}>
+              <View style = {{flexDirection: 'row', justifyContent:'center', marginTop: 20}}>
                 <Text>Already registered? </Text>
                 <TouchableOpacity onPress={() => {navigation.goBack()}}>
                     <Text style={{color:'blue', marginBottom: 25}}>Login</Text>
