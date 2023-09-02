@@ -11,7 +11,7 @@ const App = () => {
     //   <Authstack></Authstack>
     // </NavigationContainer>
     // <User_chosejob></User_chosejob>
-    <Bottomtab></Bottomtab>
+    <Bottomtab></Bottomtab> 
   );
 }
 
