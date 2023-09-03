@@ -1,18 +1,15 @@
 import React from 'react'
-import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Job from '../screen/home/Job';
-import User_chosejob from '../screen/home/User_chosejob';
+import Home from '../screen/home/Home';
 import Notification from '../screen/home/Notification';
 import Income from '../screen/home/Income';
 import { View, Text, Image} from 'react-native';
 import { COLORS } from '../constants/colorIcon';
 
-
 const Tab = createBottomTabNavigator();
 const Bottomtab = () => {
   return (
-    <NavigationContainer>
         <Tab.Navigator screenOptions={{headerShown: false, tabBarShowLabel: false,
           tabBarStyle: {
             position: 'absolute',
@@ -24,8 +21,8 @@ const Bottomtab = () => {
             backgroundColor: '#FFE3E3'
 
           }}}>
-            <Tab.Screen name="ประกาศจ้าง" 
-            component={User_chosejob}
+            <Tab.Screen name="ประกาศจ้าง2" 
+            component={Home}
             options={{
               tabBarIcon:({focused}) => {
                 return(
@@ -92,7 +89,7 @@ const Bottomtab = () => {
             }}
             ></Tab.Screen>
         </Tab.Navigator>
-    </NavigationContainer>
+        
   )
 }
 

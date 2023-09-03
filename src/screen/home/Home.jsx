@@ -1,8 +1,9 @@
+
 import React from 'react';
 import { View, Image, Text, TouchableOpacity, StyleSheet, SafeAreaView} from 'react-native';
 import { ScrollView , FlatList} from 'react-native';
 
-const User_chosejob = () => {
+const Home = () => {
   const dataDeatail = ([
     {name: 'ตี๋น้อยรัชโยธิน',
      time: '00:00 - 12:00',
@@ -79,23 +80,7 @@ const User_chosejob = () => {
 ]);
   return (
     <SafeAreaView style={{backgroundColor: 'white', flex:1}}>
-      <View style={{ alignItems: 'center', flexDirection: 'row', paddingVertical: 20, borderBottomLeftRadius: 10, borderBottomRightRadius: 10, backgroundColor: '#ffffff' }}>
-        <TouchableOpacity onPress={() => {}}>
-          <Image
-            source={require('../../assets/image/3Line.png')}
-            style={{ width: 30, height: 20, marginLeft: 10 }}
-            resizeMode="contain"
-          />
-        </TouchableOpacity>
-        <Text style={{ marginHorizontal: 30, fontSize: 15, fontWeight: 'bold', flexGrow: 2, fontSize: 20, color: '#000000' }}> ประกาศจ้างงาน </Text>
-        <TouchableOpacity onPress={() => {}}>
-          <Image
-            source={require('../../assets/image/Filtericon.png')}
-            style={{ width: 30, height: 20, marginRight: 20 }}
-            resizeMode='contain'
-          />
-        </TouchableOpacity>
-      </View>
+      
       <View style={{margin:10, padding:5}}>
         <Text style={{color:'#000000', fontSize:17}}>Day</Text>
       </View>
@@ -146,4 +131,4 @@ const styles = StyleSheet.create({
 }
 )
 
-export default User_chosejob;
+export default Home;

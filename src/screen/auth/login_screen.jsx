@@ -20,7 +20,7 @@ const Loginpage = ({navigation}) => {
                     style={styles.input} 
                     secureTextEntry={true} 
                     />
-                    <TouchableOpacity onPress={() => {}} style={styles.loginbut}>
+                    <TouchableOpacity onPress={() => {navigation.navigate('HomeScreen')}} style={styles.loginbut}>
                         <Text style={{color: '#ffffff'}}>Login</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => {navigation.navigate('Register')}} style={{marginVertical:10}}>
