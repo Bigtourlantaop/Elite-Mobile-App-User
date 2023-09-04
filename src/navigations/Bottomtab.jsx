@@ -5,12 +5,13 @@ import Home from '../screen/home/Home';
 import Notification from '../screen/home/Notification';
 import Income from '../screen/home/Income';
 import { View, Text, Image} from 'react-native';
-import { COLORS } from '../constants/colorIcon';
+import { COLORS } from '../constants/colorIcon'; 
 
 const Tab = createBottomTabNavigator();
+
 const Bottomtab = () => {
   return (
-        <Tab.Navigator screenOptions={{headerShown: false, tabBarShowLabel: false,
+        <Tab.Navigator screenOptions={{headerShown: false,tabBarShowLabel: false,
           tabBarStyle: {
             position: 'absolute',
             height: 60,
@@ -23,8 +24,8 @@ const Bottomtab = () => {
           }}}>
             <Tab.Screen name="ประกาศจ้าง2" 
             component={Home}
-            options={{
-              tabBarIcon:({focused}) => {
+            options={{title:'Homepage'
+              ,tabBarIcon:({focused}) => {
                 return(
                   <View style={{alignItems: 'center', justifyContent: 'center', height: 60}}>
                     <Image 

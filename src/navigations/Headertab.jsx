@@ -5,6 +5,8 @@ import Income from '../screen/home/Income';
 import Job from '../screen/home/Job';
 import CustomDrawer from '../components/CustomDrawer';
 import Bottomtab from './Bottomtab';
+import Profile from '../screen/home/Profile';
+
 const Drawer = createDrawerNavigator();
 
 const Headertab = () =>{
@@ -13,11 +15,11 @@ const Headertab = () =>{
     screenOptions={{drawerLabelStyle: {marginLeft: -25, fontSize:17},
     drawerActiveBackgroundColor: '#176B87',
     drawerActiveTintColor: '#EEEEEE',
-    drawerInactiveTintColor: '#000000'
+    drawerInactiveTintColor: '#000000',
     }}
     >
         <Drawer.Screen
-        name = "ประกาศจ้าง"
+        name = "Home"
         component={Bottomtab}
         options={{
             drawerIcon: () => (<Image source={require('../assets/image/Home.png')} 
@@ -26,24 +28,14 @@ const Headertab = () =>{
         }}
         />
         <Drawer.Screen
-        name = "Job"
-        component={Job}
+        name = "Profile"
+        component={Profile}
         options={{
             drawerIcon: () => (<Image source={require('../assets/image/FooterIcon/CardOutline.png')} 
             style={{ width: 30, height: 20}}
             resizeMode='contain'></Image>)
         }}
         />
-        <Drawer.Screen
-        name = "Income"
-        component={Income}
-        options={{
-            drawerIcon: () => (<Image source={require('../assets/image/FooterIcon/Dollar.png')} 
-            style={{ width: 30, height: 20}}
-            resizeMode='contain'></Image>)
-        }}
-        />
-
     </Drawer.Navigator>
   )
 }
