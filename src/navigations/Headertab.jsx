@@ -1,8 +1,6 @@
 import { Image } from 'react-native'
 import React from 'react'
 import { createDrawerNavigator } from '@react-navigation/drawer'
-import Income from '../screen/home/Income'; 
-import Job from '../screen/home/Job';
 import CustomDrawer from '../components/CustomDrawer';
 import Bottomtab from './Bottomtab';
 import Profile from '../screen/home/Profile';
