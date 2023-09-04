@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { View, Image, Text, TouchableOpacity, StyleSheet, SafeAreaView} from 'react-native';
+import { View, Image, Text, StyleSheet, SafeAreaView} from 'react-native';
 import { ScrollView , FlatList} from 'react-native';
 
 const Home = () => {
@@ -102,7 +102,7 @@ const Home = () => {
         renderItem={({ item }) => (
           <View style={{alignItems:'center',flexDirection: 'row', margin:10, borderBottomWidth:1}}>
             <Image 
-              source={require('../../assets/image/TeeNoi.png')}
+              source={require('../../assets/image/TeeNoi.png')} 
               style={{ width: 60, height: 80,}}
               resizeMode='contain'
             />
