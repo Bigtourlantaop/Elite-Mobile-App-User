@@ -4,6 +4,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer'
 import CustomDrawer from '../components/CustomDrawer';
 import Bottomtab from './Bottomtab';
 import Profile from '../screen/home/Profile';
+import Profilestack from './Profilestack';
 
 const Drawer = createDrawerNavigator();
 
@@ -27,7 +28,7 @@ const Headertab = () =>{
         />
         <Drawer.Screen
         name = "Profile"
-        component={Profile}
+        component={Profilestack}
         options={{
             drawerIcon: () => (<Image source={require('../assets/image/FooterIcon/CardOutline.png')} 
             style={{ width: 30, height: 20}}
