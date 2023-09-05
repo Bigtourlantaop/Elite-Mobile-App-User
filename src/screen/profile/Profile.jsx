@@ -15,6 +15,8 @@ const ListData = (
   }
 )
 
+
+
 export default function Profile({navigation}) {
   return (
     <SafeAreaView style={{flex:1,}}>

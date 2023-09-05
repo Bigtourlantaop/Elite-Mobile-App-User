@@ -3,7 +3,6 @@ import React from 'react'
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import CustomDrawer from '../components/CustomDrawer';
 import Bottomtab from './Bottomtab';
-import Profile from '../screen/home/Profile';
 import Profilestack from './Profilestack';
 
 const Drawer = createDrawerNavigator();
