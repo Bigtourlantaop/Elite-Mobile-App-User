@@ -21,7 +21,7 @@ export default function Profile({navigation}) {
   return (
     <SafeAreaView style={{flex:1,}}>
       <ScrollView>
-        <TouchableOpacity onPress={() => {navigation.navigate('editProfile')}}>
+        <TouchableOpacity onPress={() => {navigation.navigate('EditProfile')}}>
           <View style={{flexDirection:'row-reverse', marginLeft: 10, marginTop:20}}>
             <Text style={{color: '#000000'}}>แก้ไขข้อมูล</Text>
           </View>
@@ -70,10 +70,15 @@ export default function Profile({navigation}) {
           <Text style={{color: '#176B87', fontSize: 17}}>LineId :  </Text>
           <Text style={{color:'#000000', fontSize: 17}}>{ListData.lineid}</Text>
         </View>
-        <View style={{flexDirection:'row', marginTop: 15, marginHorizontal:25}}>
-          <Text style={{color: '#176B87', fontSize: 17}}>ที่อยู่ปัจจุบัน :  </Text>
-          <Text style={{color:'#000000', fontSize: 17}}>{ListData.mylocation}</Text>
+        <View style={{marginTop: 15, marginHorizontal:25}}>
+          <Text style={{color: '#176B87', fontSize: 17}}>ที่อยู่ปัจจุบัน</Text>
+          <View style={{borderWidth: 10, alignItems: 'center', margin: 15, borderColor: '#EEEEEE'}}>
+            <Image source={require('../../assets/image/Maps.png')} style={{width: '100%', height:250, margin: 15}}></Image>
+            <View style={{flexDirection: 'row'}}>
+            </View>
+          </View>
         </View>
+        
       </ScrollView>
     </SafeAreaView>
   )

@@ -24,10 +24,10 @@ const Loginpage = ({navigation}) => {
                         <Text style={{color: '#ffffff'}}>Login</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => {navigation.navigate('Register')}} style={{marginVertical:10}}>
-                    <Text style={{color: '#000000'}}>Register</Text>
+                        <Text style={{color: '#000000'}}>Register</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => {}} style={{marginVertical:10}}>
-                    <Text style={{color: '#000000'}}>Forget Password?</Text>
+                        <Text style={{color: '#000000'}}>Forget Password?</Text>
                     </TouchableOpacity>
                 </View>
             </View>
