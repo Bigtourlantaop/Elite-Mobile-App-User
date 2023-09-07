@@ -4,50 +4,13 @@ import { ScrollView , FlatList} from 'react-native';
 
 const dataDeatail = ([
   {name: 'ตี๋น้อยรัชโยธิน',
-   time: '00:00 - 12:00',
-   position: 'ล้างจาน',
-   credit: '50'
+  text: 'มีงานใหม่จ้าาาาา',
+  date: '6 ม.ค. 66'
   },
   {name: 'ตี๋น้อยรัชโยธิน',
-  time: '00:00 - 12:00',
-  position: 'ล้างจาน',
-  credit: '40'
+  text: 'ผมโดนภรรยาปลุกขึ้นมากลางดึกแล้วบอกว่ามีโจรเข้าบ้านแต่เธอถูกโจรฆ่าตายไปตั้งแต่ 2 ปีที่แล้ว',
+  date: '7 ม.ค. 66'
   },
-  {name: 'ตี๋น้อยรัชโยธิน',
-  time: '00:00 - 12:00',
-  position: 'ล้างจาน',
-  credit: '30'
-  },
-  {name: 'ตี๋น้อยรัชโยธิน',
-  time: '00:00 - 12:00',
-  position: 'ล้างจาน',
-  credit: '20'
-  },
-  {name: 'ตี๋น้อยรัชโยธิน',
-  time: '00:00 - 12:00',
-  position: 'ล้างจาน',
-  credit: '10'
-  },
-  {name: 'ตี๋น้อยรัชโยธิน',
-  time: '00:00 - 12:00',
-  position: 'ล้างจาน',
-  credit: '5'
-  },
-  {name: 'ตี๋น้อยรัชโยธิน',
-  time: '00:00 - 12:00',
-  position: 'ล้างจาน',
-  credit: '4'
-  },
-  {name: 'ตี๋น้อยรัชโยธิน',
-  time: '00:00 - 12:00',
-  position: 'ล้างจาน',
-  credit: '3'
-  },
-  {name: 'ตี๋น้อยรัชโยธิน',
-  time: '00:00 - 12:00',
-  position: 'ล้างจาน',
-  credit: '2'
-  }
 ]);
 
 export default function Job() {
@@ -59,14 +22,9 @@ export default function Job() {
         showsVerticalScrollIndicator={false}
         keyExtractor={(item,index) => index.toString()}
         renderItem={({ item }) => (
-          <View style={{alignItems:'center',flexDirection: 'row', margin:10, borderBottomWidth:1}}>
-            <Image 
-              source={require('../../assets/image/TeeNoi.png')} 
-              style={{ width: 60, height: 80,}}
-              resizeMode='contain'
-            />
-            <Text style={{margin:10, flexGrow:2}}>ชื่อ : {item.name}{'\n'}เวลา : {item.time}{'\n'}ตำแหน่ง : {item.position}</Text>
-            <Text>{item.credit} เครดิต/ชั่วโมง</Text>
+          <View style={{flexDirection: 'column', margin:10, borderBottomWidth:1}}>
+            <Text style={{margin:5, color:'red'}}>{item.name}  ({item.date})</Text>
+            <Text style={{marginLeft: 20, marginBottom:8}}>{item.text}</Text>
           </View>
         )}
       />
