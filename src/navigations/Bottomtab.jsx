@@ -14,7 +14,7 @@ const Bottomtab = () => {
         <Tab.Navigator screenOptions={{headerShown: false,tabBarShowLabel: false,
           tabBarStyle: {
             position: 'absolute',
-            height: 60,
+            height: 80,
             bottom: 0,
             right: 0,
             left: 0,
