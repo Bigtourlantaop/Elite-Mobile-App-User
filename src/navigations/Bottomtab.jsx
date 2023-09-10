@@ -1,11 +1,11 @@
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Job from '../screen/home/Job';
-import Home from '../screen/home/Home';
 import Notification from '../screen/home/Notification';
 import Income from '../screen/home/Income';
 import { View, Text, Image} from 'react-native';
 import { COLORS } from '../constants/colorIcon'; 
+import Jobstack from './Jobstack';
 
 const Tab = createBottomTabNavigator();
 
@@ -23,7 +23,7 @@ const Bottomtab = () => {
 
           }}}>
             <Tab.Screen name="ประกาศจ้าง2" 
-            component={Home}
+            component={Jobstack}
             options={{title:'Homepage'
               ,tabBarIcon:({focused}) => {
                 return(
