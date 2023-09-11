@@ -26,7 +26,7 @@ const Loginpage = ({navigation}) => {
                     <TouchableOpacity onPress={() => {navigation.navigate('Register')}} style={{marginVertical:10}}>
                         <Text style={{color: '#000000'}}>Register</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => {}} style={{marginVertical:10}}>
+                    <TouchableOpacity onPress={() => {navigation.navigate('Forget')}} style={{marginVertical:10}}>
                         <Text style={{color: '#000000'}}>Forget Password?</Text>
                     </TouchableOpacity>
                 </View>

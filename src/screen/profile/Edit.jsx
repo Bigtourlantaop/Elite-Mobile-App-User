@@ -1,13 +1,26 @@
-import { View, Text, TouchableOpacity, Image, SafeAreaView, ImageBackground, TextInput, ScrollView, StyleSheet} from 'react-native'
+import { View, Text, TouchableOpacity, Image, SafeAreaView, ImageBackground, TextInput, ScrollView, StyleSheet, Alert} from 'react-native'
 import {React, useState} from 'react'
 import DropDownsex from '../../components/DropdownSex'
 import DatePicker from 'react-native-date-picker'
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 
 
 const Edit = ({navigation}) => {
   const [date, setDate] = useState(new Date())
   const [open, setOpen] = useState(false)
   const [doblabel, setDoblabel] = useState('Date of Birth')
+  const [selectImage, setselectImage] = useState(null)
+
+  const choseImage = () => {
+    let options ={
+      storageOptions:{
+        path: "image"
+      }
+    }
+    launchImageLibrary(options, response => {
+      setselectImage(response.assets[0].uri)
+    })
+  }
 
   return (
     <SafeAreaView style={{flex:1, marginHorizontal:20}}>
@@ -18,10 +31,18 @@ const Edit = ({navigation}) => {
           </View>
         </TouchableOpacity>
         <View style={{alignItems:'center', marginTop: 20}}>
-          <TouchableOpacity onPress={() => {}}>
-            <ImageBackground source={require('../../assets/image/ProfileIcon.png')}
-                      style={{height:175, width: 175, opacity: 0.4}}
-                      resizeMode='contain'>
+          <TouchableOpacity onPress={() => {choseImage()}}>
+            <ImageBackground 
+              source={selectImage == '' ? require('../../assets/image/ProfileIcon.png'): {uri:selectImage}}
+              style={{
+                height: 135,
+                width: 135,
+                opacity: 0.4,
+                borderRadius: 87.5, 
+                overflow: 'hidden' 
+              }}
+              resizeMode='cover'
+            >
               <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
                 <Image source={require('../../assets/image/camera.png')} style={{height: 50, width: 100}} resizeMode='contain'></Image>
               </View>
