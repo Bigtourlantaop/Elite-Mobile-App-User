@@ -30,7 +30,7 @@ const Bottomtab = () => {
                   <View style={{alignItems: 'center', justifyContent: 'center', height: 60}}>
                     <Image 
                     source={focused ? require('../assets/image/FooterIcon/PeopleOutline.png'): require('../assets/image/FooterIcon/People.png')}
-                    style={{ width: 30, height: 20}}
+                    style={{ marginTop: 15, width: 30, height: 20}}
                     resizeMode='contain'/>
                     <Text style={{color:'#000000'}}>ประกาศจ้าง</Text>
                   </View>
@@ -47,7 +47,7 @@ const Bottomtab = () => {
                   borderTopColor: focused ? COLORS.primary : COLORS.background}}>
                     <Image 
                     source={focused ? require('../assets/image/FooterIcon/Card.png') : require('../assets/image/FooterIcon/CardOutline.png')}
-                    style={{ width: 30, height: 20}}
+                    style={{ marginTop: 15, width: 30, height: 20}}
                     resizeMode='contain'/>
                     <Text style={{color:'#000000'}}>งาน</Text>
                   </View>
@@ -64,7 +64,7 @@ const Bottomtab = () => {
                   borderTopColor: focused ? COLORS.primary : COLORS.background}}>
                     <Image 
                     source={focused ? require('../assets/image/FooterIcon/BellOutline.png') : require('../assets/image/FooterIcon/Bell.png')}
-                    style={{ width: 30, height: 20}}
+                    style={{ marginTop: 15, width: 30, height: 20}}
                     resizeMode='contain'/>
                     <Text style={{color:'#000000'}}>การแจ้งเตือน</Text>
                   </View>
@@ -81,7 +81,7 @@ const Bottomtab = () => {
                   borderTopColor: focused ? COLORS.primary : COLORS.background}}>
                     <Image 
                     source={focused ? require('../assets/image/FooterIcon/DollarOutline.png') : require('../assets/image/FooterIcon/Dollar.png')}
-                    style={{ width: 30, height: 20}}
+                    style={{ marginTop: 15, width: 30, height: 20}}
                     resizeMode='contain'/>
                     <Text style={{color:'#000000'}}>รายได้</Text>
                   </View>

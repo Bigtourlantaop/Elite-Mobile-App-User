@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity} from 'react-native';
-import { ScrollView , FlatList} from 'react-native';
+import { FlatList} from 'react-native';
 
 const Income = ({ navigation }) => {
   const dataDeatail = ([

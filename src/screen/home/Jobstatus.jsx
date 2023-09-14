@@ -7,7 +7,7 @@ const Jobstatus = ({ route }) => {
   const navigation = useNavigation();
 
   return (
-    <ScrollView style={{marginBottom: 60}}>
+    <ScrollView style={{marginBottom: 100}}>
       <View style={{flexDirection : 'row' ,marginHorizontal: 10, marginBottom: 20, marginTop: 20, justifyContent:'center'}}>
         <Image
           source={require('../../assets/image/TeeNoi.png')}
@@ -46,7 +46,6 @@ const Jobstatus = ({ route }) => {
         </View>
       <View style={{ marginVertical:10}}>
         <Button title="ย้อนกลับ" onPress={() => {navigation.goBack()}}></Button>
-        <Button title="สมัครงาน" onPress={() => {}}/>
       </View>
     </ScrollView>
   );

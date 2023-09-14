@@ -1,4 +1,4 @@
-import { Image } from 'react-native'
+import { Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import CustomDrawer from '../components/CustomDrawer';
@@ -16,15 +16,31 @@ const Headertab = () =>{
     drawerInactiveTintColor: '#000000',
     }}
     >
-        <Drawer.Screen
-        name = "Home"
+      <Drawer.Screen
+        name="Home"
         component={Bottomtab}
-        options={{
-            drawerIcon: () => (<Image source={require('../assets/image/Home.png')} 
-            style={{ width: 30, height: 20}}
-            resizeMode='contain'></Image>)
-        }}
-        />
+        options={({ navigation }) => ({
+          drawerIcon: () => (
+            <Image
+              source={require('../assets/image/Home.png')}
+              style={{ width: 30, height: 20 }}
+              resizeMode='contain'
+            />
+          ),
+          headerRight: () => (
+            <TouchableOpacity
+              onPress={() => {navigation.navigate('ค้นหา')}}
+              style={{ marginRight: 15 }}
+            >
+              <Image
+                source={require('../assets/image/Filtericon.png')}
+                style={{ width: 30, height: 30 , opacity: 0.67}}
+                resizeMode='contain'
+              />
+            </TouchableOpacity>
+          ),
+        })}
+      />
         <Drawer.Screen
         name = "Profile"
         component={Profilestack}
