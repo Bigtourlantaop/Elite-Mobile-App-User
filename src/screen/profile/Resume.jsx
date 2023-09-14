@@ -5,7 +5,7 @@ const Resume = ({navigation}) => {
   return (
     <SafeAreaView style = {{flex:1,}}>
       <View style = {{alignItems: 'center'}}>
-        <TextInput style={{borderWidth:1, width: '80%', marginTop: 30, height: 500}} multiline={true} textAlignVertical="top" />
+        <TextInput style={{borderWidth:1, width: '80%', marginTop: 30, height: 500, padding: 5}} multiline={true} textAlignVertical="top" />
       </View>
       <TouchableOpacity onPress={() => {navigation.goBack()}} style={styles.Savebut}>
           <Text style={{color: '#ffffff'}}>บันทึก</Text>

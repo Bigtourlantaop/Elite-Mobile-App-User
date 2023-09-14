@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { ImageBackground, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Authcontext } from "../../context/Authcontext";
 
 const Loginpage = ({navigation}) => {
-
+    const test = useContext(Authcontext)
     return (
         <ImageBackground source={require('../../assets/image/Background_Login.png')} style={{flex:1, justifyContent:'center'}}>
             <View style={{backgroundColor:'white', margin:35, borderRadius:30, }}>

@@ -44,7 +44,7 @@ const Income = ({ navigation }) => {
   return (
     <SafeAreaView style={{backgroundColor: 'white', flex:1}}>
       <View style={{padding:10}}>
-        <View style={{flexDirection: 'row', marginHorizontal: 95, marginTop: 30, marginBottom:10}}>
+        <View style={{flexDirection: 'row', justifyContent: 'center'}}>
           <View style={styles.circle}>
             <Text style={styles.text}>ยอดเงินคงเหลือ</Text>
             <Text style={styles.textnum}>200.00</Text>

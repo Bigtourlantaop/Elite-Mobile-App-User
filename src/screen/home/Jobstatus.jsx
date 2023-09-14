@@ -2,8 +2,8 @@ import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { View, Text, Image, Button, StyleSheet, ScrollView } from 'react-native';
 
-const Jobdetail = ({ route }) => {
-  const { name, time, position, credit } = route.params.item;
+const Jobstatus = ({ route }) => {
+  const { name, time, position, credit, state, color } = route.params.item;
   const navigation = useNavigation();
 
   return (
@@ -41,6 +41,9 @@ const Jobdetail = ({ route }) => {
             <Text>8.มีบุคลิกดี ทัศนคติดี</Text>
           </View>
         </View>
+        <View style={{justifyContent:'center', alignItems:'center', marginTop:20, marginHorizontal: 20, borderWidth:1, height:50, borderRadius:10, backgroundColor: color, borderColor: '#ffffff' }}>
+            <Text style={{color: 'white', fontSize: 19}}>{state}</Text>
+        </View>
       <View style={{ marginVertical:10}}>
         <Button title="ย้อนกลับ" onPress={() => {navigation.goBack()}}></Button>
         <Button title="สมัครงาน" onPress={() => {}}/>
@@ -74,4 +77,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Jobdetail;
+export default Jobstatus;

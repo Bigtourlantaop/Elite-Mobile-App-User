@@ -12,14 +12,14 @@ const Home = () => {
     [ '10', 'Sun' ],
     [ '11', 'Mon' ],
     [ '12', 'Tue' ],
-    [ '13', 'Wednes' ],
-    [ '14', 'Thurs' ],
+    [ '13', 'Wed' ],
+    [ '14', 'Thu' ],
     [ '15', 'Fri' ],
-    [ '16', 'Satur' ],
+    [ '16', 'Sat' ],
     [ '17', 'Sun' ],
     [ '18', 'Mon' ],
     [ '19', 'Tue' ],
-    [ '20', 'Wednes' ]
+    [ '20', 'Wed' ]
   ]
 
   function newData(chose){

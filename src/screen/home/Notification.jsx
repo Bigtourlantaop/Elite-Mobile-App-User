@@ -1,6 +1,6 @@
-import { StyleSheet, Text, View, SafeAreaView, Image} from 'react-native'
+import { StyleSheet, Text, View, SafeAreaView} from 'react-native'
 import React from 'react'
-import { ScrollView , FlatList} from 'react-native';
+import {FlatList} from 'react-native';
 
 const dataDeatail = ([
   {name: 'ตี๋น้อยรัชโยธิน',
@@ -13,7 +13,7 @@ const dataDeatail = ([
   },
 ]);
 
-export default function Job() {
+export default function Notification() {
   return (
     <SafeAreaView style={{backgroundColor: 'white', flex:1}}>
       <FlatList

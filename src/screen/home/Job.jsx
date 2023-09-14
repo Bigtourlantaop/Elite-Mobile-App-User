@@ -1,6 +1,7 @@
-import { StyleSheet, Text, View, SafeAreaView, Image} from 'react-native'
+import { StyleSheet, Text, View, SafeAreaView, Image, TouchableOpacity} from 'react-native'
 import React from 'react'
-import { ScrollView , FlatList} from 'react-native';
+import {FlatList} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const dataDeatail = ([
   {name: 'ตี๋น้อยรัชโยธิน',
@@ -22,11 +23,12 @@ const dataDeatail = ([
   position: 'ล้างจาน',
   credit: '30',
   state: 'รอ',
-  color: 'black',
+  color: '#FFB000',
   },
 ]);
 
 export default function Job() {
+  const navigation = useNavigation();
   return (
     <SafeAreaView style={{backgroundColor: 'white', flex:1}}>
       <FlatList
@@ -35,23 +37,22 @@ export default function Job() {
         showsVerticalScrollIndicator={false}
         keyExtractor={(item,index) => index.toString()}
         renderItem={({ item }) => (
-          <View style={{alignItems:'center',flexDirection: 'row', margin:10, borderBottomWidth:1}}>
-            <Image 
-              source={require('../../assets/image/TeeNoi.png')} 
-              style={{ width: 60, height: 80,}}
-              resizeMode='contain'
-            />
-            <Text style={{margin:10, flexGrow:2}}>ชื่อ : {item.name}{'\n'}เวลา : {item.time}{'\n'}ตำแหน่ง : {item.position}</Text>
-            <View style={{flexDirection:'column', alignItems:'center'}}>
-              <Text>{item.credit} เครดิต/ชั่วโมง</Text>
-              <Text style={{color: item.color}}>{item.state}</Text>
+          <TouchableOpacity onPress={() => {navigation.navigate('statusjob', {item})}}>
+            <View style={{alignItems:'center',flexDirection: 'row', margin:10, borderBottomWidth:1}}>
+              <Image 
+                source={require('../../assets/image/TeeNoi.png')} 
+                style={{ width: 60, height: 80,}}
+                resizeMode='contain'
+              />
+              <Text style={{margin:10, flexGrow:2}}>ชื่อ : {item.name}{'\n'}เวลา : {item.time}{'\n'}ตำแหน่ง : {item.position}</Text>
+              <View style={{flexDirection:'column', alignItems:'center'}}>
+                <Text>{item.credit} เครดิต/ชั่วโมง</Text>
+                <Text style={{color: item.color}}>{item.state}</Text>
+              </View>
             </View>
-            <Text></Text>
-          </View>
+          </TouchableOpacity>
         )}
       />
     </SafeAreaView>
   )
 }
-
-const styles = StyleSheet.create({})

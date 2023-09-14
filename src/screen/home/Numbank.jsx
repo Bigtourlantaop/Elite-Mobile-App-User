@@ -14,12 +14,7 @@ const Numbank = ({navigation}) => {
             <Text style={style.text}>จำนวนเงิน</Text>
             <TextInput style={style.input2} placeholder='ใส่จำนวนเงิน'></TextInput>
         </View>
-
-        <View style={style.view3}>
-            <Text style={style.text}>จดจำ</Text>
-            <TextInput style={style.input3} placeholder='ใส่ชื่อ'></TextInput>
-        </View>
-
+        
         <View style={style.view2}>
             <View style={style.button}>
                 <TouchableOpacity style={style.button}>
