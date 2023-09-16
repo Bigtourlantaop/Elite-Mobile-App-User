@@ -3,7 +3,7 @@ import { ImageBackground, StyleSheet, Text, TextInput, TouchableOpacity, View } 
 import { Authcontext } from "../../context/Authcontext";
 
 const Loginpage = ({navigation}) => {
-    const test = useContext(Authcontext)
+    const {login} = useContext(Authcontext)
     return (
         <ImageBackground source={require('../../assets/image/Background_Login.png')} style={{flex:1, justifyContent:'center'}}>
             <View style={{backgroundColor:'white', margin:35, borderRadius:30, }}>
@@ -21,7 +21,7 @@ const Loginpage = ({navigation}) => {
                     style={styles.input} 
                     secureTextEntry={true} 
                     />
-                    <TouchableOpacity onPress={() => {navigation.navigate('HomeScreen')}} style={styles.loginbut}>
+                    <TouchableOpacity onPress={() => {login()}} style={styles.loginbut}>
                         <Text style={{color: '#ffffff'}}>Login</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => {navigation.navigate('Register')}} style={{marginVertical:10}}>
