@@ -1,8 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { ImageBackground, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { Authcontext } from "../../context/Authcontext";
 
 const Loginpage = ({navigation}) => {
+    const [email, setEmail] = useState(null)
+    const [pw, setPw] = useState(null)
+
     const {login} = useContext(Authcontext)
     return (
         <ImageBackground source={require('../../assets/image/Background_Login.png')} style={{flex:1, justifyContent:'center'}}>
@@ -15,13 +18,17 @@ const Loginpage = ({navigation}) => {
                     placeholder="Email" 
                     style={styles.input} 
                     keyboardType="email-address"
+                    value={email}
+                    onChangeText={text => setEmail(text)}
                     />
                     <TextInput 
                     placeholder="Password" 
                     style={styles.input} 
-                    secureTextEntry={true} 
+                    secureTextEntry={true}
+                    value={pw}
+                    onChangeText={text => setPw(text)}
                     />
-                    <TouchableOpacity onPress={() => {login()}} style={styles.loginbut}>
+                    <TouchableOpacity onPress={() => {login(email, pw )}} style={styles.loginbut}>
                         <Text style={{color: '#ffffff'}}>Login</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => {navigation.navigate('Register')}} style={{marginVertical:10}}>

@@ -5,7 +5,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import { Authcontext } from '../context/Authcontext'
 
 export default function CustomDrawer( props ) {
-    const {logout} = useContext(Authcontext )
+    const {logout} = useContext(Authcontext)
     const {navigation} = props;
     return (
     <View style={{flex:1}}>

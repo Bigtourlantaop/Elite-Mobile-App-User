@@ -20,7 +20,7 @@ const AppNav = () => {
   }
   return (
     <NavigationContainer>
-      {userToken !== null ?  <Headertab></Headertab> :  <Authstack></Authstack>}
+      {userToken != null ?  <Headertab></Headertab> :  <Authstack></Authstack>}
     </NavigationContainer>
   )
 }
