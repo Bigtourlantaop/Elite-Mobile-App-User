@@ -1,8 +1,14 @@
-import React from 'react';
+import React , {useState, useContext, useEffect}from 'react';
 import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity} from 'react-native';
 import { FlatList} from 'react-native';
+import { Authcontext } from '../../context/Authcontext';
+import axios from 'axios';
 
 const Income = ({ navigation }) => {
+  const [hasFetchedData, setHasFetchedData] = useState(false);
+  const [data, setData] = useState([]);
+  const {userInfo} = useContext(Authcontext)
+
   const dataDeatail = ([
     {date: '6 ม.ค. 66',
      time: '16.00',
@@ -41,13 +47,28 @@ const Income = ({ navigation }) => {
     credit: '+50.00'
     }
 ]);
+
+useEffect(() => {
+  if (!hasFetchedData) {
+    axios.get(`http://localhost:8000/users/${userInfo.user_id}`)
+      .then((res) => {
+        console.log("Data", res.data);
+        setData(res.data);
+        setHasFetchedData(true);
+      })
+      .catch(e => {
+        console.error('Error', e);
+      });
+  }
+}, [hasFetchedData]);
+
   return (
     <SafeAreaView style={{backgroundColor: 'white', flex:1}}>
       <View style={{padding:10}}>
         <View style={{flexDirection: 'row', justifyContent: 'center'}}>
           <View style={styles.circle}>
             <Text style={styles.text}>ยอดเงินคงเหลือ</Text>
-            <Text style={styles.textnum}>200.00</Text>
+            <Text style={styles.textnum}>{data.credit}</Text>
           </View>
         </View>
       </View>

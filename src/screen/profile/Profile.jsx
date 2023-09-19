@@ -1,12 +1,27 @@
 import { View, Text, SafeAreaView, Image, ScrollView, TouchableOpacity } from 'react-native'
-import React, {useContext} from 'react'
+import React, {useContext, useState, useEffect} from 'react'
 import { Authcontext } from '../../context/Authcontext';
-
-const _point = 1;
-
+import axios from 'axios';
 
 export default function Profile({navigation}) {
+  const [hasFetchedData, setHasFetchedData] = useState(false);
+  const [data, setData] = useState([]);
   const {userInfo} = useContext(Authcontext)
+
+  useEffect(() => {
+    if (!hasFetchedData) {
+      axios.get(`http://localhost:8000/users/${userInfo.user_id}`)
+        .then((res) => {
+          console.log("Data", res.data);
+          setData(res.data);
+          setHasFetchedData(true);
+        })
+        .catch(e => {
+          console.error('Error', e);
+        });
+    }
+  }, [hasFetchedData]);
+
   return (
     <SafeAreaView style={{flex:1,}}>
       <ScrollView>
@@ -23,41 +38,41 @@ export default function Profile({navigation}) {
         <View style={{alignItems:'center'}}>
           <Text style={{fontSize: 30, color:'#000000', fontWeight:'500'}}>{userInfo.first_name}</Text>
           <View style={{ alignItems:'center',flexDirection: 'row', marginTop: 10}}>
-            <Image source={_point >= 1 ? require('../../assets/image/StarOutline.png') : require('../../assets/image/Star.png')} style={{height:40, width:40}}></Image>
-            <Image source={_point >= 2 ? require('../../assets/image/StarOutline.png') : require('../../assets/image/Star.png')} style={{height:40, width:40}}></Image>
-            <Image source={_point >= 3 ? require('../../assets/image/StarOutline.png') : require('../../assets/image/Star.png')} style={{height:40, width:40}}></Image>
-            <Image source={_point >= 4 ? require('../../assets/image/StarOutline.png') : require('../../assets/image/Star.png')} style={{height:40, width:40}}></Image>
-            <Image source={_point >= 5 ? require('../../assets/image/StarOutline.png') : require('../../assets/image/Star.png')} style={{height:40, width:40}}></Image>
-            <Text style={{marginLeft:20, fontSize: 20, color:'#000000', fontWeight:'400'}}>คะแนน {_point}</Text>
+            <Image source={data.point >= 25 ? require('../../assets/image/StarOutline.png') : require('../../assets/image/Star.png')} style={{height:40, width:40}}></Image>
+            <Image source={data.point >= 50 ? require('../../assets/image/StarOutline.png') : require('../../assets/image/Star.png')} style={{height:40, width:40}}></Image>
+            <Image source={data.point >= 100 ? require('../../assets/image/StarOutline.png') : require('../../assets/image/Star.png')} style={{height:40, width:40}}></Image>
+            <Image source={data.point >= 150 ? require('../../assets/image/StarOutline.png') : require('../../assets/image/Star.png')} style={{height:40, width:40}}></Image>
+            <Image source={data.point >= 200 ? require('../../assets/image/StarOutline.png') : require('../../assets/image/Star.png')} style={{height:40, width:40}}></Image>
+            <Text style={{marginLeft:20, fontSize: 20, color:'#000000', fontWeight:'400'}}>คะแนน {data.point}</Text>
           </View>
         </View>
         <View style={{flexDirection:'row', marginTop: 25, marginHorizontal:25}}>
           <Text style={{color: '#176B87', fontSize: 17}}>ชื่อเล่น :  </Text>
-          <Text style={{color:'#000000', fontSize: 17}}>{userInfo.nick_name}</Text>
+          <Text style={{color:'#000000', fontSize: 17}}>{data.nick_name}</Text>
         </View>
         <View style={{flexDirection:'row', marginTop: 15, marginHorizontal:25}}>
           <Text style={{color: '#176B87', fontSize: 17}}>เพศ :  </Text>
-          <Text style={{color:'#000000', fontSize: 17}}>{userInfo.gender}</Text>
+          <Text style={{color:'#000000', fontSize: 17}}>{data.gender}</Text>
         </View>
         <View style={{flexDirection:'row', marginTop: 15, marginHorizontal:25}}>
           <Text style={{color: '#176B87', fontSize: 17}}>อายุ :  </Text>
-          <Text style={{color:'#000000', fontSize: 17}}>{userInfo.age}</Text>
+          <Text style={{color:'#000000', fontSize: 17}}>{data.age}</Text>
         </View>
         <View style={{flexDirection:'row', marginTop: 15, marginHorizontal:25}}>
           <Text style={{color: '#176B87', fontSize: 17}}>วันเกิด :  </Text>
-          <Text style={{color:'#000000', fontSize: 17}}>{userInfo.birth_date}</Text>
+          <Text style={{color:'#000000', fontSize: 17}}>{data.birth_date}</Text>
         </View>
         <View style={{flexDirection:'row', marginTop: 15, marginHorizontal:25}}>
           <Text style={{color: '#176B87', fontSize: 17}}>เบอร์โทรศัพท์ :  </Text>
-          <Text style={{color:'#000000', fontSize: 17}}>{userInfo.tel}</Text>
+          <Text style={{color:'#000000', fontSize: 17}}>{data.tel}</Text>
         </View>
         <View style={{flexDirection:'row', marginTop: 15, marginHorizontal:25}}>
           <Text style={{color: '#176B87', fontSize: 17}}>Gmail :  </Text>
-          <Text style={{color:'#000000', fontSize: 17}}>{userInfo.email}</Text>
+          <Text style={{color:'#000000', fontSize: 17}}>{data.email}</Text>
         </View>
         <View style={{flexDirection:'row', marginTop: 15, marginHorizontal:25}}>
           <Text style={{color: '#176B87', fontSize: 17}}>LineId :  </Text>
-          <Text style={{color:'#000000', fontSize: 17}}>{userInfo.line_id}</Text>
+          <Text style={{color:'#000000', fontSize: 17}}>{data.line_id}</Text>
         </View>
         <View style={{marginTop: 15, marginHorizontal:25}}>
           <Text style={{color: '#176B87', fontSize: 17}}>ที่อยู่ปัจจุบัน</Text>
