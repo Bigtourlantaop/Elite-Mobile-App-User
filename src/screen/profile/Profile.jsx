@@ -1,23 +1,12 @@
 import { View, Text, SafeAreaView, Image, ScrollView, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, {useContext} from 'react'
+import { Authcontext } from '../../context/Authcontext';
 
 const _point = 1;
 
-const ListData = (
-  { nickname: 'มอส',
-    sex: 'F',
-    age: '20',
-    date: '19 ตุลาคม 2545',
-    tel: '0123456789',
-    email: 'mos@gmail.com',
-    lineid: '-',
-    mylocation: '-',
-  }
-)
-
-
 
 export default function Profile({navigation}) {
+  const {userInfo} = useContext(Authcontext)
   return (
     <SafeAreaView style={{flex:1,}}>
       <ScrollView>
@@ -32,7 +21,7 @@ export default function Profile({navigation}) {
                 resizeMode='contain'></Image>
         </View>
         <View style={{alignItems:'center'}}>
-          <Text style={{fontSize: 30, color:'#000000', fontWeight:'500'}}>Van der Sar</Text>
+          <Text style={{fontSize: 30, color:'#000000', fontWeight:'500'}}>{userInfo.first_name}</Text>
           <View style={{ alignItems:'center',flexDirection: 'row', marginTop: 10}}>
             <Image source={_point >= 1 ? require('../../assets/image/StarOutline.png') : require('../../assets/image/Star.png')} style={{height:40, width:40}}></Image>
             <Image source={_point >= 2 ? require('../../assets/image/StarOutline.png') : require('../../assets/image/Star.png')} style={{height:40, width:40}}></Image>
@@ -44,31 +33,31 @@ export default function Profile({navigation}) {
         </View>
         <View style={{flexDirection:'row', marginTop: 25, marginHorizontal:25}}>
           <Text style={{color: '#176B87', fontSize: 17}}>ชื่อเล่น :  </Text>
-          <Text style={{color:'#000000', fontSize: 17}}>{ListData.nickname}</Text>
+          <Text style={{color:'#000000', fontSize: 17}}>{userInfo.nick_name}</Text>
         </View>
         <View style={{flexDirection:'row', marginTop: 15, marginHorizontal:25}}>
           <Text style={{color: '#176B87', fontSize: 17}}>เพศ :  </Text>
-          <Text style={{color:'#000000', fontSize: 17}}>{ListData.sex}</Text>
+          <Text style={{color:'#000000', fontSize: 17}}>{userInfo.gender}</Text>
         </View>
         <View style={{flexDirection:'row', marginTop: 15, marginHorizontal:25}}>
           <Text style={{color: '#176B87', fontSize: 17}}>อายุ :  </Text>
-          <Text style={{color:'#000000', fontSize: 17}}>{ListData.age}</Text>
+          <Text style={{color:'#000000', fontSize: 17}}>{userInfo.age}</Text>
         </View>
         <View style={{flexDirection:'row', marginTop: 15, marginHorizontal:25}}>
           <Text style={{color: '#176B87', fontSize: 17}}>วันเกิด :  </Text>
-          <Text style={{color:'#000000', fontSize: 17}}>{ListData.date}</Text>
+          <Text style={{color:'#000000', fontSize: 17}}>{userInfo.birth_date}</Text>
         </View>
         <View style={{flexDirection:'row', marginTop: 15, marginHorizontal:25}}>
           <Text style={{color: '#176B87', fontSize: 17}}>เบอร์โทรศัพท์ :  </Text>
-          <Text style={{color:'#000000', fontSize: 17}}>{ListData.tel}</Text>
+          <Text style={{color:'#000000', fontSize: 17}}>{userInfo.tel}</Text>
         </View>
         <View style={{flexDirection:'row', marginTop: 15, marginHorizontal:25}}>
           <Text style={{color: '#176B87', fontSize: 17}}>Gmail :  </Text>
-          <Text style={{color:'#000000', fontSize: 17}}>{ListData.email}</Text>
+          <Text style={{color:'#000000', fontSize: 17}}>{userInfo.email}</Text>
         </View>
         <View style={{flexDirection:'row', marginTop: 15, marginHorizontal:25}}>
           <Text style={{color: '#176B87', fontSize: 17}}>LineId :  </Text>
-          <Text style={{color:'#000000', fontSize: 17}}>{ListData.lineid}</Text>
+          <Text style={{color:'#000000', fontSize: 17}}>{userInfo.line_id}</Text>
         </View>
         <View style={{marginTop: 15, marginHorizontal:25}}>
           <Text style={{color: '#176B87', fontSize: 17}}>ที่อยู่ปัจจุบัน</Text>

@@ -1,15 +1,17 @@
 
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { View, Image, Text, StyleSheet, SafeAreaView, TouchableOpacity} from 'react-native';
 import { ScrollView , FlatList} from 'react-native';
+import { Authcontext } from '../../context/Authcontext';
 
 const Home = () => {
   const navigation = useNavigation();
   const [selectedData, setSelectedData] = useState([]);
   const [dateData, setDateData] = useState([]);
   const [hasFetchedData, setHasFetchedData] = useState(false);
+  const {userInfo} = useContext(Authcontext)
 
   useEffect(() => {
     if (!hasFetchedData) {

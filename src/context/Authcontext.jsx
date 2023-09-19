@@ -7,6 +7,7 @@ export const Authcontext = createContext();
 export const AuthProvider = ({children}) => {
     const [isLoading, setIsLoading] = useState(false);
     const [userToken, setUserToken] = useState(null);
+    const [userInfo, setUserInfo] = useState(null);
 
     const login = (username, password) => {
         setIsLoading(true)
@@ -17,8 +18,11 @@ export const AuthProvider = ({children}) => {
         .then(res => {
             console.log(res.data)
             setUserToken(res.data['access token'])
-            if (res && res.data && res.data.access_token){
+            setUserInfo(res.data['data'])
+            // console.log(res.data['data'])
+            if (res && res.data && res.data['access token'] && res.data['data']){
                 AsyncStorage.setItem('userToken', res.data['access token'])
+                AsyncStorage.setItem('userInfo', JSON.stringify(res.data['data'])) 
             }
         })
         .catch(e => {
@@ -30,6 +34,7 @@ export const AuthProvider = ({children}) => {
     const logout = async () => {
         setIsLoading(true)
         AsyncStorage.removeItem('userToken')
+        AsyncStorage.removeItem('userInfo')
         setUserToken(null);
         setIsLoading(false)
     }
@@ -38,7 +43,12 @@ export const AuthProvider = ({children}) => {
         try{ 
             setIsLoading(true)
             let userToken = await AsyncStorage.getItem('userToken')
-            setUserToken(userToken)
+            let userInfo = await AsyncStorage.getItem('userInfo')
+            userInfo = JSON.parse(userInfo)
+            if (userInfo) {
+                setUserToken(userToken)
+                setUserInfo(userInfo)
+            }
             setIsLoading(false)
         } catch(e) {
             console.log(`isLogged in error ${e}`)
@@ -49,7 +59,7 @@ export const AuthProvider = ({children}) => {
         isLoggedIn()
     }, [])
     return(
-        <Authcontext.Provider value={{login, logout, isLoading, userToken}}>
+        <Authcontext.Provider value={{login, logout, isLoading, userToken, userInfo}}>
             {children}
         </Authcontext.Provider>
     )
