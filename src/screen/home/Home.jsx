@@ -1,30 +1,33 @@
 
 import { useNavigation } from '@react-navigation/native';
-import React, {useState} from 'react';
+import axios from 'axios';
+import React, {useState, useEffect} from 'react';
 import { View, Image, Text, StyleSheet, SafeAreaView, TouchableOpacity} from 'react-native';
 import { ScrollView , FlatList} from 'react-native';
 
 const Home = () => {
   const navigation = useNavigation();
   const [selectedData, setSelectedData] = useState([]);
-  const next12Days = [
-    [ '9', 'Sat' ],
-    [ '10', 'Sun' ],
-    [ '11', 'Mon' ],
-    [ '12', 'Tue' ],
-    [ '13', 'Wed' ],
-    [ '14', 'Thu' ],
-    [ '15', 'Fri' ],
-    [ '16', 'Sat' ],
-    [ '17', 'Sun' ],
-    [ '18', 'Mon' ],
-    [ '19', 'Tue' ],
-    [ '20', 'Wed' ]
-  ]
+  const [dateData, setDateData] = useState([]);
+  const [hasFetchedData, setHasFetchedData] = useState(false);
+
+  useEffect(() => {
+    if (!hasFetchedData) {
+      axios.get('http://localhost:8000/12datenext')
+        .then((res) => {
+          console.log("Data", res.data.next12Days);
+          setDateData(res.data.next12Days);
+          setHasFetchedData(true);
+        })
+        .catch(e => {
+          console.error('Error', e);
+        });
+    }
+  }, [hasFetchedData]);
 
   function newData(chose){
     const date =  [{
-      '9': [{name: 'ตี๋น้อย',
+      '20': [{name: 'ตี๋น้อย',
             time: '00:00 - 12:00',
             position: 'ล้างจาน',
             credit: '50'
@@ -34,12 +37,12 @@ const Home = () => {
             position: 'ล้างจาน',
             credit: '40'
             }]},
-      {'10': [{name: 'ตี๋น้อย',
+      {'21': [{name: 'ตี๋น้อย',
             time: '00:00 - 12:00',
             position: 'ล้างจาน',
             credit: '30'
             }]},
-      {'11': [{name: 'ตี๋น้อย',
+      {'22': [{name: 'ตี๋น้อย',
             time: '00:00 - 12:00',
             position: 'ล้างจาน',
             credit: '40'
@@ -61,12 +64,12 @@ const Home = () => {
         <Text style={{color:'#000000', fontSize:17}}>Day</Text>
       </View>
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-        {next12Days.map(day => (
-          <TouchableOpacity key={day} onPress={() => {newData(day[0])}}>
+        {dateData.map(day => (
+          <TouchableOpacity key={day} onPress={() => {newData(day[0].slice(8,10))}}>
             <View style={{flexDirection: 'row', marginHorizontal: 5,}}>
               <View style={styles.cicleView}>
-                <Text style={styles.textincircle}>{day[0]}</Text>
-                <Text style={styles.textincircle}>{day[1]}</Text>
+                <Text style={styles.textincircle}>{day[1].slice(0, 3)}</Text>
+                <Text style={styles.textincircle}>{day[0].slice(8,10)}</Text>
               </View>
             </View>
           </TouchableOpacity>

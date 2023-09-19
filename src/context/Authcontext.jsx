@@ -10,7 +10,7 @@ export const AuthProvider = ({children}) => {
 
     const login = (username, password) => {
         setIsLoading(true)
-        axios.post('http://3.26.16.124:8000/users/login', {
+        axios.post('http://localhost:8000/users/login', {
             username,
             password
         })
