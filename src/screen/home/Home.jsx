@@ -3,63 +3,50 @@ import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import React, {useState, useEffect, useContext} from 'react';
 import { View, Image, Text, StyleSheet, SafeAreaView, TouchableOpacity} from 'react-native';
-import { ScrollView , FlatList} from 'react-native';
+import { ScrollView , FlatList, RefreshControl} from 'react-native';
 import { Authcontext } from '../../context/Authcontext';
 
 const Home = () => {
   const navigation = useNavigation();
   const [selectedData, setSelectedData] = useState([]);
   const [dateData, setDateData] = useState([]);
-  const [hasFetchedData, setHasFetchedData] = useState(false);
-  const {userInfo} = useContext(Authcontext)
+  const [Datalist, setDatalist] = useState([]);
 
   useEffect(() => {
-    if (!hasFetchedData) {
-      axios.get('http://localhost:8000/12datenext')
-        .then((res) => {
-          console.log("Data", res.data.next12Days);
-          setDateData(res.data.next12Days);
-          setHasFetchedData(true);
-        })
-        .catch(e => {
-          console.error('Error', e);
-        });
-    }
-  }, [hasFetchedData]);
+    axios.get('http://localhost:8000/12datenext')
+      .then((res) => {
+        console.log("Data", res.data.next12Days);
+        setDateData(res.data.next12Days);
+      })
+      .catch(e => {
+        console.error('Error', e);
+      });
+  }, []);
 
-  function newData(chose){
-    const date =  [{
-      '20': [{name: 'ตี๋น้อย',
-            time: '00:00 - 12:00',
-            position: 'ล้างจาน',
-            credit: '50'
-            },
-            {name: 'รัชโยธิน',
-            time: '00:00 - 12:00',
-            position: 'ล้างจาน',
-            credit: '40'
-            }]},
-      {'21': [{name: 'ตี๋น้อย',
-            time: '00:00 - 12:00',
-            position: 'ล้างจาน',
-            credit: '30'
-            }]},
-      {'22': [{name: 'ตี๋น้อย',
-            time: '00:00 - 12:00',
-            position: 'ล้างจาน',
-            credit: '40'
-            }]},
-      ]
-    let a;
-    for (const element of date) {
-      for (const key in element) {
-        if (key == chose) {
-          a = (element[key]);
-        }
-      }
-    }
-    setSelectedData(a);
+  function newData(chose) {
+    axios.get(`http://localhost:8000/work_date/${chose}`)
+      .then((res) => {
+        console.log("DataListworkId", res.data);
+        setDatalist(res.data.work_list);
+        Promise.all(res.data.work_list.map(work_id => 
+          axios.get(`http://localhost:8000/works/${work_id}`)
+        ))
+        .then(responses => {
+          const workData = responses.map(response => response.data);
+          console.log("Work Data", workData);
+          setSelectedData(workData);
+        })
+        .catch(error => {
+          console.error('Error fetching work data:', error);
+        });
+      })
+      .catch(e => {
+        console.error('Error', e);
+      });
   }
+  
+    
+
   return (
     <SafeAreaView style={{backgroundColor: 'white'}}>
       <View style={{margin:10, padding:5}}>
@@ -67,7 +54,7 @@ const Home = () => {
       </View>
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
         {dateData.map(day => (
-          <TouchableOpacity key={day} onPress={() => {newData(day[0].slice(8,10))}}>
+          <TouchableOpacity key={day} onPress={() => {newData(day[0])}}>
             <View style={{flexDirection: 'row', marginHorizontal: 5,}}>
               <View style={styles.cicleView}>
                 <Text style={styles.textincircle}>{day[1].slice(0, 3)}</Text>
@@ -81,7 +68,7 @@ const Home = () => {
           data={selectedData}
           contentContainerStyle={{ paddingBottom: 60 }}
           showsVerticalScrollIndicator={false}
-          keyExtractor={(item) => item.name}
+          keyExtractor={(item) => item.work.work_id}
           renderItem={({ item }) => (
             <TouchableOpacity onPress={() => {navigation.navigate('รายละเอียดงาน',{ item })}}>
               <View style={{alignItems:'center',flexDirection: 'row', margin:10, borderBottomWidth:1}}>
@@ -90,8 +77,8 @@ const Home = () => {
                   style={{ width: 60, height: 80,}}
                   resizeMode='contain'
                 />
-                <Text style={{margin:10, flexGrow:2}}>ชื่อ : {item.name}{'\n'}เวลา : {item.time}{'\n'}ตำแหน่ง : {item.position}</Text>
-                <Text>{item.credit} เครดิต/ชั่วโมง</Text>
+                <Text style={{margin:10, flexGrow:2}}>ชื่อ : {item.work.name}{'\n'}เวลา : {item.work.start_time} - {item.work.end_time}{'\n'}ตำแหน่ง : {item.work.type_of_work}</Text>
+                <Text>{item.work.hourly_income} เครดิต/ชั่วโมง</Text>
               </View>
             </TouchableOpacity>
           )}

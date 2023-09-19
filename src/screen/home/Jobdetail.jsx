@@ -3,7 +3,7 @@ import React from 'react';
 import { View, Text, Image, Button, StyleSheet, ScrollView } from 'react-native';
 
 const Jobdetail = ({ route }) => {
-  const { name, time, position, credit } = route.params.item;
+  const { name, start_time, end_time ,type_of_work, hourly_income } = route.params.item.work;
   const navigation = useNavigation();
 
   return (
@@ -15,9 +15,9 @@ const Jobdetail = ({ route }) => {
         />
         <View style={{padding: 30}}>
           <Text style = {{fontSize : 25}}>{name}</Text>
-          <Text>   {time}</Text>
-          <Text style ={{color: 'red' }}>   {position}</Text>
-          <Text>   {credit} เครดิต/ชั่วโมง</Text>
+          <Text>   {start_time} - {end_time}</Text>
+          <Text style ={{color: 'red' }}>   {type_of_work}</Text>
+          <Text>   {hourly_income} เครดิต/ชั่วโมง</Text>
         </View>
       </View>
       <View style={styles.textContainer}>
