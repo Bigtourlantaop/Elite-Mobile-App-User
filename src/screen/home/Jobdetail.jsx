@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, Image, Button, StyleSheet, ScrollView } from 'react-native';
 
 const Jobdetail = ({ route }) => {

@@ -10,7 +10,6 @@ const Home = () => {
   const navigation = useNavigation();
   const [selectedData, setSelectedData] = useState([]);
   const [dateData, setDateData] = useState([]);
-  const [Datalist, setDatalist] = useState([]);
 
   useEffect(() => {
     axios.get('http://localhost:8000/12datenext')
@@ -27,7 +26,6 @@ const Home = () => {
     axios.get(`http://localhost:8000/work_date/${chose}`)
       .then((res) => {
         console.log("DataListworkId", res.data);
-        setDatalist(res.data.work_list);
         Promise.all(res.data.work_list.map(work_id => 
           axios.get(`http://localhost:8000/works/${work_id}`)
         ))
