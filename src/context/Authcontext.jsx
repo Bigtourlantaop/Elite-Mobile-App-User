@@ -19,7 +19,6 @@ export const AuthProvider = ({children}) => {
             console.log(res.data)
             setUserToken(res.data['access token'])
             setUserInfo(res.data['data'])
-            // console.log(res.data['data'])
             if (res && res.data && res.data['access token'] && res.data['data']){
                 AsyncStorage.setItem('userToken', res.data['access token'])
                 AsyncStorage.setItem('userInfo', JSON.stringify(res.data['data'])) 
@@ -36,6 +35,7 @@ export const AuthProvider = ({children}) => {
         AsyncStorage.removeItem('userToken')
         AsyncStorage.removeItem('userInfo')
         setUserToken(null);
+        setUserInfo(null);
         setIsLoading(false)
     }
 
