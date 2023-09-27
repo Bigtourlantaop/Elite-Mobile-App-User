@@ -5,31 +5,45 @@ import { Authcontext } from '../../context/Authcontext';
 import axios from 'axios';
 
 export default function Notification() {
-  const [data, setData] = useState([]);
+  const [selectedData, setSelectedData] = useState([]);
   const {userInfo} = useContext(Authcontext)
 
-  useEffect(() => {
+  useEffect(() =>{
+    try {
       axios.get(`http://localhost:8000/users/${userInfo.user_id}/noti`)
         .then((res) => {
-          console.log("Data", res.data);
-          setData(res.data);
-          setHasFetchedData(true);
+          console.log("DataListworkId", res.data);
+          Promise.all(res.data.map(noti_id => 
+            axios.get(`http://localhost:8000/users/noti/${noti_id}`)
+          ))
+          .then(responses => {
+            const workData = responses.map(response => response.data);
+            console.log(workData)
+            setSelectedData(workData);
+          })
         })
-        .catch(e => {
-          console.error('Error', e);
-        });
-    }, []
-    );
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        setSelectedData([]); 
+      }
+    }
+  }, [userInfo.user_id]);
+
   return (
     <SafeAreaView style={{backgroundColor: 'white', flex:1}}>
       <FlatList
-        data={data}
+        data={selectedData}
         contentContainerStyle={{ paddingBottom: 60 }}
         showsVerticalScrollIndicator={false}
-        keyExtractor={(item,index) => index.toString()}
+        keyExtractor={(item) => item._id}
+        ListEmptyComponent={() => (
+          <View style={{ alignItems: 'center', marginTop: 20 }}>
+            <Text>No Notification</Text>
+          </View>
+        )}
         renderItem={({ item }) => (
           <View style={{flexDirection: 'column', margin:10, borderBottomWidth:1}}>
-            <Text style={{margin:5, color:'red'}}>{item.recruiter_name}  ({item.date.slice(0,10)})</Text>
+            <Text style={{margin:5, color:'red'}}>{item.name}  ({item.date.slice(0,10)})</Text>
             <Text style={{marginLeft: 20, marginBottom:8}}>{item.text}</Text>
           </View>
         )}

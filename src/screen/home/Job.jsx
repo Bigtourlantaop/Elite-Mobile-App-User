@@ -15,23 +15,36 @@ export default function Job() {
 
 
   useEffect(() =>{
-  axios.get(`http://localhost:8000/users/${userInfo.user_id}/works`)
-  .then((res) => {
-    console.log("DataListworkId", res.data);
-    Promise.all(res.data.work_list.map(work_id => 
-      axios.get(`http://localhost:8000/users/${userInfo.user_id}/works/${work_id}`)
-    ))
-    .then(responses => {
-      const workData = responses.map(response => response.data);
-      console.log("Work Data", workData);
-      setSelectedData(workData);
-    })
-  })
-  .catch(e => {
-    console.error('Error', e);
-  });
-  } , []
-  )
+    try {
+      axios.get(`http://localhost:8000/users/${userInfo.user_id}/works`)
+        .then((res) => {
+          console.log("DataListworkId", res.data);
+          Promise.all(res.data.work_list.map(work_id => 
+            axios.get(`http://localhost:8000/users/${userInfo.user_id}/works/${work_id}`)
+          ))
+          .then(responses => {
+            const workData = responses.map(response => response.data);
+            console.log("Work Data", workData);
+            setSelectedData(workData);
+          })
+          .catch(error => {
+            if (error.response && error.response.status === 400) {
+              setSelectedData([]); 
+            }
+          });
+        })
+        .catch(error => {
+          if (error.response && error.response.status === 400) {
+            setSelectedData([]);
+          }
+        });
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        setSelectedData([]); 
+      }
+    }
+  }, []);
+  
 
   const getStatusColor = (status) => {
     switch (status) {
@@ -53,6 +66,11 @@ export default function Job() {
         contentContainerStyle={{ paddingBottom: 60 }}
         showsVerticalScrollIndicator={false}
         keyExtractor={(item ,index) => index.toString()}
+        ListEmptyComponent={() => (
+          <View style={{ alignItems: 'center', marginTop: 20 }}>
+            <Text>No jobs</Text>
+          </View>
+        )}
         renderItem={({ item }) => (
           <TouchableOpacity onPress={() => {navigation.navigate('statusjob', {item})}}>
             <View style={{alignItems:'center',flexDirection: 'row', margin:10, borderBottomWidth:1}}>

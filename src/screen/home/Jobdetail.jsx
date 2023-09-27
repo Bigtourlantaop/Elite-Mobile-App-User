@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import { View, Text, Image, Button, StyleSheet, ScrollView } from 'react-native';
 
 const Jobdetail = ({ route }) => {
-  const { name, start_time, end_time ,type_of_work, hourly_income } = route.params.item.work;
+  const { name, start_time, end_time ,type_of_work, hourly_income } = route.params.item;
   const navigation = useNavigation();
 
   return (

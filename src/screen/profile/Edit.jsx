@@ -2,7 +2,7 @@ import { View, Text, TouchableOpacity, Image, SafeAreaView, ImageBackground, Tex
 import {React, useState} from 'react'
 import DropDownsex from '../../components/DropdownSex'
 import DatePicker from 'react-native-date-picker'
-import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import {launchImageLibrary} from 'react-native-image-picker';
 
 
 const Edit = ({navigation}) => {
@@ -33,7 +33,7 @@ const Edit = ({navigation}) => {
         <View style={{alignItems:'center', marginTop: 20}}>
           <TouchableOpacity onPress={() => {choseImage()}}>
             <ImageBackground 
-              source={selectImage == '' ? require('../../assets/image/ProfileIcon.png'): {uri:selectImage}}
+              source={selectImage ? {uri:selectImage} : require('../../assets/image/ProfileIcon.png')}
               style={{
                 height: 135,
                 width: 135,
