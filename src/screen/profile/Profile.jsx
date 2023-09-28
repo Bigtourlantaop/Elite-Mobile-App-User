@@ -2,28 +2,27 @@ import { View, Text, SafeAreaView, Image, ScrollView, TouchableOpacity } from 'r
 import React, {useContext, useState, useEffect} from 'react'
 import { Authcontext } from '../../context/Authcontext';
 import axios from 'axios';
+import { useFocusEffect } from '@react-navigation/native';
 
 export default function Profile({navigation}) {
-  const [hasFetchedData, setHasFetchedData] = useState(false);
   const [data, setData] = useState([]);
   const {userInfo} = useContext(Authcontext)
 
-  useEffect(() => {
-    if (!hasFetchedData) {
-      axios.get(`http://localhost:8000/users/${userInfo.user_id}`)
-        .then((res) => {
-          console.log("Data", res.data);
-          setData(res.data);
-          setHasFetchedData(true);
-        })
-        .catch(e => {
-          console.error('Error', e);
-        });
-    }
-  }, [hasFetchedData]);
-
+  useFocusEffect(
+    React.useCallback(() => {
+      const fetchData = async () => {
+        try {
+          const response = await axios.get(`http://localhost:8000/users/${userInfo.user_id}`);
+          setData(response.data);
+        } catch (error) {
+          console.error('Error fetching user data:', error);
+        }
+      };
+      fetchData();
+    }, [userInfo])
+  );
   return (
-    <SafeAreaView style={{flex:1,}}>
+    <SafeAreaView style={{flex:1,backgroundColor : 'white'}}>
       <ScrollView>
         <TouchableOpacity onPress={() => {navigation.navigate('EditProfile')}}>
           <View style={{flexDirection:'row-reverse', marginLeft: 10, marginTop:20}}>
@@ -36,7 +35,7 @@ export default function Profile({navigation}) {
                 resizeMode='contain'></Image>
         </View>
         <View style={{alignItems:'center'}}>
-          <Text style={{fontSize: 30, color:'#000000', fontWeight:'500'}}>{userInfo.first_name}</Text>
+          <Text style={{fontSize: 30, color:'#000000', fontWeight:'500'}}>{data.first_name} {data.last_name}</Text>
           <View style={{ alignItems:'center',flexDirection: 'row', marginTop: 10}}>
             <Image source={data.point >= 25 ? require('../../assets/image/StarOutline.png') : require('../../assets/image/Star.png')} style={{height:40, width:40}}></Image>
             <Image source={data.point >= 50 ? require('../../assets/image/StarOutline.png') : require('../../assets/image/Star.png')} style={{height:40, width:40}}></Image>

@@ -5,9 +5,10 @@ import { Dropdown } from 'react-native-element-dropdown';
 const data = [
   { label: 'M', value: '1' },
   { label: 'F', value: '2' },
+  { label: 'ไม่ระบุ', value: '3'},
 ];
 
-const DropDownsex = () => {
+const DropDownsex = ({onValueChange}) => {
   const [value, setValue] = useState(null);
 
   const renderItem = item => {
@@ -33,6 +34,7 @@ const DropDownsex = () => {
       value={value}
       onChange={item => {
         setValue(item.value);
+        onValueChange(item.label);
       }}
       renderItem={renderItem}
     />
