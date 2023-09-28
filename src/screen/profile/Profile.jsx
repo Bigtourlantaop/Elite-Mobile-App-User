@@ -24,7 +24,7 @@ export default function Profile({navigation}) {
   return (
     <SafeAreaView style={{flex:1,backgroundColor : 'white'}}>
       <ScrollView>
-        <TouchableOpacity onPress={() => {navigation.navigate('EditProfile')}}>
+        <TouchableOpacity onPress={() => {navigation.navigate('EditProfile', data)}}>
           <View style={{flexDirection:'row-reverse', marginLeft: 10, marginTop:20}}>
             <Text style={{color: '#000000'}}>แก้ไขข้อมูล</Text>
           </View>

@@ -5,27 +5,19 @@ import DatePicker from 'react-native-date-picker'
 import {launchImageLibrary} from 'react-native-image-picker';
 import axios from 'axios';
 import { Authcontext } from '../../context/Authcontext';
+import { useNavigation } from '@react-navigation/native';
 
 
-const Edit = ({navigation}) => {
+const Edit = ({route}) => {
+  const navigation = useNavigation()
   const [date, setDate] = useState(new Date())
   const [open, setOpen] = useState(false)
   const [doblabel, setDoblabel] = useState('Date of Birth')
   const [selectImage, setselectImage] = useState(null)
   const {userInfo} = useContext(Authcontext)
-  const [formData, setFormData] = useState({
-    first_name: '',
-    last_name: '',
-    nick_name: '',
-    gender: '',
-    age: 0,
-    birth_date: '',
-    tel: '',
-    email: '',
-    line_id: '',
-    address: '267 ลาดพร้าววังหิน',
-  });
-
+  const initialFormData= route.params
+  console.log(initialFormData)
+  const [formData, setFormData] = useState(initialFormData)
   const handleInputChange = (name, value) => {
     if (name === 'age'){
       value = parseInt(value);
@@ -152,7 +144,9 @@ const Edit = ({navigation}) => {
           <View style={{flexDirection:'row', alignItems: 'center'}}>
             <View style={{width: '50%'}}>
               <Text>Sex</Text>
-              <DropDownsex onValueChange={handleGenderChange}>
+              <DropDownsex 
+              onValueChange={handleGenderChange}
+              value={formData.gender}>
               </DropDownsex>
             </View>
             <View style={{width: '50%'}}>
@@ -161,7 +155,7 @@ const Edit = ({navigation}) => {
               placeholder='อายุ' 
               style={styles.dropdown} 
               keyboardType='number-pad'
-              value={formData.age}
+              value={formData.age.toString()}
               onChangeText={text => handleInputChange('age', text)}></TextInput>
             </View>
           </View>
