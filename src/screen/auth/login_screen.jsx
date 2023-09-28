@@ -15,9 +15,10 @@ const Loginpage = ({navigation}) => {
                         <Text style={{fontSize:90, color: '#000000'}}>E lite</Text>
                     </View>
                     <TextInput 
-                    placeholder="Username" 
+                    placeholder="Username"
                     style={styles.input} 
                     keyboardType="email-address"
+                    autoCapitalize='none'
                     value={email}
                     onChangeText={text => setEmail(text)}
                     />
