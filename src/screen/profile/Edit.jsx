@@ -155,7 +155,7 @@ const Edit = ({route}) => {
               placeholder='อายุ' 
               style={styles.dropdown} 
               keyboardType='number-pad'
-              value={formData.age.toString()}
+              value={formData.age}
               onChangeText={text => handleInputChange('age', text)}></TextInput>
             </View>
           </View>
