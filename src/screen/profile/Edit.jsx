@@ -16,48 +16,55 @@ const Edit = ({route}) => {
   const [selectImage, setselectImage] = useState(null)
   const {userInfo} = useContext(Authcontext)
   const initialFormData= route.params
-  console.log(initialFormData)
-  const [formData, setFormData] = useState(initialFormData)
+  const [Data, setData] = useState(initialFormData)
+
   const handleInputChange = (name, value) => {
     if (name === 'age'){
       value = parseInt(value);
     }
-    console.log(formData)
-    setFormData({
-      ...formData,
+    console.log(Data)
+    setData({
+      ...Data,
       [name]: value
     });
   };
 
   const handleGenderChange = (value) => {
-    setFormData({
-      ...formData,
+    setData({
+      ...Data,
       gender: value
     });
   };
 
   const handleDateChange = (date) => {
-    setFormData({
-      ...formData,
+    setData({
+      ...Data,
       birth_date: date.slice(0,10)
     });
   };
 
   const handleFormSubmit = () => {
-    axios.patch(`http://localhost:8000/users/${userInfo.user_id}`, formData, {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    .then(response => {
-      console.log('Data sent successfully:', response.data);
-      navigation.navigate('Profileinside');
-    })
-    .catch(error => {
-      console.error('Error sending data:', error);
-    });
-  };
+    const formData = new FormData();
 
+    if (selectImage !== null){
+      formData.append('file', {
+      uri : selectImage,
+      type: "image",
+      name: selectImage.split("/").pop()
+     })
+    }
+
+    formData.append('data', JSON.stringify(Data)); 
+    axios.patch(`http://localhost:8000/users/${userInfo.user_id}`, formData)
+      .then(response => {
+        console.log('Data sent successfully:', response.data);
+        navigation.navigate('Profileinside');
+      })
+      .catch(error => {
+        console.error('Error sending data:', error);
+      });
+  };
+  
   const choseImage = () => {
     let options ={
       storageOptions:{
@@ -65,7 +72,7 @@ const Edit = ({route}) => {
       }
     }
     launchImageLibrary(options, response => {
-      setselectImage(response.assets[0].uri)
+        setselectImage(response.assets[0].uri);
     })
   }
 
@@ -110,7 +117,7 @@ const Edit = ({route}) => {
             placeholder='First Name' 
             autoCorrect= {false} 
             style={{fontSize:15}} 
-            value={formData.first_name} 
+            value={Data.first_name} 
             onChangeText={text => handleInputChange('first_name', text)}></TextInput>
           </View>
           <View style={{alignItems: 'center',marginVertical: 15, borderBottomWidth: 1, flexDirection: 'row'}}>
@@ -119,7 +126,7 @@ const Edit = ({route}) => {
             placeholder='Last Name' 
             autoCorrect= {false} 
             style={{fontSize:15}}
-            value={formData.last_name}
+            value={Data.last_name}
             onChangeText={text => handleInputChange('last_name', text)}></TextInput>
           </View>
           <View style={{alignItems: 'center',marginVertical: 15, borderBottomWidth: 1, flexDirection: 'row'}}>
@@ -128,7 +135,7 @@ const Edit = ({route}) => {
             placeholder='Nickname' 
             autoCorrect= {false} 
             style={{fontSize:15}}
-            value={formData.nick_name}
+            value={Data.nick_name}
             onChangeText={text => handleInputChange('nick_name', text)}></TextInput>
           </View>
           <View style={{alignItems: 'center',marginVertical: 15, borderBottomWidth: 1, flexDirection: 'row'}}>
@@ -138,7 +145,7 @@ const Edit = ({route}) => {
             autoCorrect= {false} 
             style={{fontSize:15}} 
             keyboardType='number-pad'
-            value={formData.tel}
+            value={Data.tel}
             onChangeText={text => handleInputChange('tel', text)}></TextInput>
           </View>
           <View style={{flexDirection:'row', alignItems: 'center'}}>
@@ -146,7 +153,7 @@ const Edit = ({route}) => {
               <Text>Sex</Text>
               <DropDownsex 
               onValueChange={handleGenderChange}
-              value={formData.gender}>
+              value={Data.gender}>
               </DropDownsex>
             </View>
             <View style={{width: '50%'}}>
@@ -155,7 +162,7 @@ const Edit = ({route}) => {
               placeholder='อายุ' 
               style={styles.dropdown} 
               keyboardType='number-pad'
-              value={formData.age}
+              value={Data.age}
               onChangeText={text => handleInputChange('age', text)}></TextInput>
             </View>
           </View>
@@ -189,7 +196,7 @@ const Edit = ({route}) => {
             autoCorrect= {false} 
             style={{fontSize:15}} 
             keyboardType='email-address'
-            value={formData.email}
+            value={Data.email}
             onChangeText={text => handleInputChange('email', text)}></TextInput>
           </View>
           <View style={{alignItems: 'center',marginVertical: 15, borderBottomWidth: 1, flexDirection: 'row'}}>
@@ -198,7 +205,7 @@ const Edit = ({route}) => {
             placeholder='Line ID' 
             autoCorrect= {false} 
             style={{fontSize:15}}
-            value={formData.line_id}
+            value={Data.line_id}
             onChangeText={text => handleInputChange('line_id', text)}></TextInput>
           </View>
           <View style={{marginVertical: 15}}>

@@ -30,9 +30,19 @@ export default function Profile({navigation}) {
           </View>
         </TouchableOpacity>
         <View style={{alignItems:'center'}}>
-          <Image source={require('../../assets/image/ProfileIcon.png')}
-                style={{height:175, width: 175}}
-                resizeMode='contain'></Image>
+          <View style={{
+            height: 175,
+            width: 175,
+            borderRadius: 65, 
+            overflow: 'hidden'
+          }}>
+            <Image 
+              source={{uri: data.image}}
+              style={{flex: 1, height: null, width: null}}
+              resizeMode="cover"
+              onError={() => console.log('Error loading image')}
+            />
+          </View>
         </View>
         <View style={{alignItems:'center'}}>
           <Text style={{fontSize: 30, color:'#000000', fontWeight:'500'}}>{data.first_name} {data.last_name}</Text>
