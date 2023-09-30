@@ -72,7 +72,9 @@ const Edit = ({route}) => {
       }
     }
     launchImageLibrary(options, response => {
+      if (response && response.assets){
         setselectImage(response.assets[0].uri);
+      }
     })
   }
 

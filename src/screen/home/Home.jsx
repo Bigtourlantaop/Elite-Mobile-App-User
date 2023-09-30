@@ -73,11 +73,18 @@ const Home = () => {
         renderItem={({ item }) => (
           <TouchableOpacity onPress={() => {navigation.navigate('รายละเอียดงาน',{ item })}}>
             <View style={{alignItems:'center',flexDirection: 'row', margin:10, borderBottomWidth:1}}>
-              <Image 
-                source={require('../../assets/image/TeeNoi.png')} 
-                style={{ width: 60, height: 80,}}
-                resizeMode='contain'
-              />
+              <View style={{
+                height: 60,
+                width: 60,
+                borderRadius: 30, 
+                overflow: 'hidden'
+              }}>
+                <Image 
+                  source={{uri : item.image}} 
+                  style={{flex: 1, height: null, width: null}}
+                  resizeMode='contain'
+                />
+              </View>
               <Text style={{margin:10, flexGrow:2}}>ชื่อ : {item.name}{'\n'}เวลา : {item.start_time} - {item.end_time}{'\n'}ตำแหน่ง : {item.type_of_work}</Text>
               <Text>{item.hourly_income} เครดิต/ชั่วโมง</Text>
             </View>
