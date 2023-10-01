@@ -3,18 +3,18 @@ import React, { useContext } from 'react';
 import { View, Text, Image, Button, StyleSheet, ScrollView } from 'react-native';
 
 const Jobdetail = ({ route }) => {
-  const { name, start_time, end_time ,type_of_work, hourly_income } = route.params.item;
+  const { name, start_time, end_time ,type_of_work, hourly_income, image } = route.params.item;
   const navigation = useNavigation();
 
   return (
     <ScrollView style={{marginBottom: 60}}>
-      <View style={{flexDirection : 'row' ,marginHorizontal: 10, marginBottom: 20, marginTop: 20, justifyContent:'center'}}>
+      <View style={{flexDirection : 'row', marginBottom: 20, marginTop: 20, justifyContent:'center', alignItems: 'center'}}>
         <Image
-          source={require('../../assets/image/TeeNoi.png')}
+          source={{uri : image}}
           style={styles.image}
         />
-        <View style={{padding: 30}}>
-          <Text style = {{fontSize : 25}}>{name}</Text>
+        <View style={{padding: 10}}>
+          <Text style = {{fontSize : 25, flexShrink: 1}} numberOfLines={1}>{name.length > 15 ? name.substring(0, 15) + '...' : name}</Text>
           <Text>   {start_time} - {end_time}</Text>
           <Text style ={{color: 'red' }}>   {type_of_work}</Text>
           <Text>   {hourly_income} เครดิต/ชั่วโมง</Text>
