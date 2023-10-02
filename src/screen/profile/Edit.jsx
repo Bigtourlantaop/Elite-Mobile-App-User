@@ -29,6 +29,19 @@ const Edit = ({route}) => {
     });
   };
 
+  const calculateAge = (dob) => {
+    const today = new Date();
+    const birthDate = new Date(dob);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDiff = today.getMonth() - birthDate.getMonth();
+  
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    return age;
+  };
+  
+
   const handleGenderChange = (value) => {
     setData({
       ...Data,
@@ -39,7 +52,8 @@ const Edit = ({route}) => {
   const handleDateChange = (date) => {
     setData({
       ...Data,
-      birth_date: date.slice(0,10)
+      birth_date: date.slice(0,10),
+      age: calculateAge(date.slice(0,10))
     });
   };
 
@@ -113,60 +127,46 @@ const Edit = ({route}) => {
               </ImageBackground>
             </TouchableOpacity>
           </View>
-          <View style={{alignItems: 'center',marginVertical: 15, borderBottomWidth: 1, flexDirection: 'row'}}>
+          <View style={{alignItems: 'center',marginVertical: 15, flexDirection: 'row'}}>
+            <Text style={{fontSize: 17, marginRight: 10}}>First Name</Text>
             <Image source={require('../../assets/image/FooterIcon/People.png')} style={{height:30, width:40, marginRight: 5}}></Image>
             <TextInput 
             placeholder='First Name' 
-            autoCorrect= {false} 
-            style={{fontSize:15}} 
+            autoCorrect= {false}
+            style={{fontSize:15, borderBottomWidth: 1, height: 30, width: 250}}
             value={Data.first_name} 
             onChangeText={text => handleInputChange('first_name', text)}></TextInput>
           </View>
-          <View style={{alignItems: 'center',marginVertical: 15, borderBottomWidth: 1, flexDirection: 'row'}}>
+          <View style={{alignItems: 'center',marginVertical: 15, flexDirection: 'row'}}>
+            <Text style={{fontSize: 17, marginRight: 10}}>Last Name</Text>
             <Image source={require('../../assets/image/FooterIcon/People.png')} style={{height:30, width:40, marginRight: 5}}></Image>
             <TextInput 
             placeholder='Last Name' 
             autoCorrect= {false} 
-            style={{fontSize:15}}
+            style={{fontSize:15, borderBottomWidth: 1, height: 30, width: 250}}
             value={Data.last_name}
             onChangeText={text => handleInputChange('last_name', text)}></TextInput>
           </View>
-          <View style={{alignItems: 'center',marginVertical: 15, borderBottomWidth: 1, flexDirection: 'row'}}>
+          <View style={{alignItems: 'center',marginVertical: 15, flexDirection: 'row'}}>
+            <Text style={{fontSize: 17, marginRight: 10}}>Nick Name</Text>
             <Image source={require('../../assets/image/FooterIcon/People.png')} style={{height:30, width:40, marginRight: 5}}></Image>
             <TextInput 
             placeholder='Nickname' 
             autoCorrect= {false} 
-            style={{fontSize:15}}
+            style={{fontSize:15, borderBottomWidth: 1, height: 30, width: 250}}
             value={Data.nick_name}
             onChangeText={text => handleInputChange('nick_name', text)}></TextInput>
           </View>
-          <View style={{alignItems: 'center',marginVertical: 15, borderBottomWidth: 1, flexDirection: 'row'}}>
+          <View style={{alignItems: 'center',marginVertical: 15, flexDirection: 'row'}}>
+            <Text style={{fontSize: 17, marginRight: 10}}>Telephone</Text>
             <Image source={require('../../assets/image/PhoneIcon.png')} style={{height:30, width:40, marginRight: 5}}></Image>
             <TextInput 
             placeholder='Phone' 
             autoCorrect= {false} 
-            style={{fontSize:15}} 
+            style={{fontSize:15, borderBottomWidth: 1, height: 30, width: 250}} 
             keyboardType='number-pad'
             value={Data.tel}
             onChangeText={text => handleInputChange('tel', text)}></TextInput>
-          </View>
-          <View style={{flexDirection:'row', alignItems: 'center'}}>
-            <View style={{width: '50%'}}>
-              <Text>Sex</Text>
-              <DropDownsex 
-              onValueChange={handleGenderChange}
-              value={Data.gender}>
-              </DropDownsex>
-            </View>
-            <View style={{width: '50%'}}>
-              <Text>Age</Text>
-              <TextInput 
-              placeholder='อายุ' 
-              style={styles.dropdown} 
-              keyboardType='number-pad'
-              value={Data.age}
-              onChangeText={text => handleInputChange('age', text)}></TextInput>
-            </View>
           </View>
           <View style={{height: 45,borderBottomWidth: 1,marginVertical: 15,alignItems: 'center',flexDirection: 'row'}}>
             <Image source={require('../../assets/image/Calender.png')} style={{height:35, width:35, marginRight: 5}}></Image>
@@ -191,22 +191,39 @@ const Edit = ({route}) => {
               setOpen(false)
             }}
           />
-          <View style={{alignItems: 'center',marginVertical: 15, borderBottomWidth: 1, flexDirection: 'row'}}>
+          <View style={{flexDirection:'row', alignItems: 'center'}}>
+            <View style={{width: '40%'}}>
+              <Text style={{fontSize: 17}}>Sex</Text>
+              <DropDownsex 
+              onValueChange={handleGenderChange}
+              value={Data.gender}>
+              </DropDownsex>
+            </View>
+            <View style={{width: '60%'}}>
+              <Text style={{fontSize: 17}}>Age(Chose Date of Birth)</Text>
+              <View style={styles.dropdown}>
+                <Text>{Data.age}</Text>
+              </View>
+            </View>
+          </View>
+          <View style={{alignItems: 'center',marginVertical: 15, flexDirection: 'row'}}>
+            <Text style={{fontSize: 17, marginRight: 10}}>Email</Text>
             <Image source={require('../../assets/image/Email.png')} style={{height:30, width:40, marginRight: 5}}></Image>
             <TextInput 
             placeholder='Email' 
             autoCorrect= {false} 
-            style={{fontSize:15}} 
+            style={{fontSize:15, borderBottomWidth: 1, height: 30, width: 300}} 
             keyboardType='email-address'
             value={Data.email}
             onChangeText={text => handleInputChange('email', text)}></TextInput>
           </View>
-          <View style={{alignItems: 'center',marginVertical: 15, borderBottomWidth: 1, flexDirection: 'row'}}>
+          <View style={{alignItems: 'center',marginVertical: 15, flexDirection: 'row'}}>
+            <Text style={{fontSize: 17, marginRight: 10}}>Line Id</Text>
             <Image source={require('../../assets/image/line.png')} style={{height:30, width:30, marginRight: 5}}></Image>
             <TextInput 
             placeholder='Line ID' 
             autoCorrect= {false} 
-            style={{fontSize:15}}
+            style={{fontSize:15, borderBottomWidth: 1, height: 30, width: 300}}
             value={Data.line_id}
             onChangeText={text => handleInputChange('line_id', text)}></TextInput>
           </View>

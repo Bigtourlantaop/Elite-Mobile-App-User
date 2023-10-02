@@ -48,11 +48,11 @@ export default function Job() {
 
   const getStatusColor = (status) => {
     switch (status) {
-      case 'working':
+      case 'กำลังทำ':
         return 'green';
-      case 'wait':
-        return 'yellow';
-      case 'finish':
+      case 'รอ':
+        return '#132043';
+      case 'เสร็จ':
         return 'red';
       default:
         return 'white';
@@ -82,7 +82,9 @@ export default function Job() {
               <Text style={{margin:10, flexGrow:2}}>ชื่อ : {item.work_detail.name}{'\n'}เวลา : {item.work_detail.start_time} - {item.work_detail.end_time}{'\n'}ตำแหน่ง : {item.work_detail.type_of_work}</Text>
               <View style={{flexDirection:'column', alignItems:'center'}}>
                 <Text style={{marginVertical: 5}}>{item.work_detail.hourly_income} เครดิต/ชั่วโมง</Text>
-                <Text style={{color: getStatusColor(item.status)}}>{item.status}</Text>
+                <View style={{backgroundColor: '#FAF2D3', width: 50, justifyContent: 'center', alignItems: 'center', height : 30, borderRadius: 5}}>
+                  <Text style={{color: getStatusColor(item.status)}}>{item.status}</Text>
+                </View>
               </View>
             </View>
           </TouchableOpacity>
