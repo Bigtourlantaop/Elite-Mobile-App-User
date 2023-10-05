@@ -6,6 +6,7 @@ import {launchImageLibrary} from 'react-native-image-picker';
 import axios from 'axios';
 import { Authcontext } from '../../context/Authcontext';
 import { useNavigation } from '@react-navigation/native';
+import { YOURAPI } from '../../constants/editendpoint';
 
 
 const Edit = ({route}) => {
@@ -69,7 +70,7 @@ const Edit = ({route}) => {
     }
 
     formData.append('data', JSON.stringify(Data)); 
-    axios.patch(`http://localhost:8000/users/${userInfo.user_id}`, formData)
+    axios.patch(`http://${YOURAPI}/users/${userInfo.user_id}`, formData)
       .then(response => {
         console.log('Data sent successfully:', response.data);
         navigation.navigate('Profileinside');

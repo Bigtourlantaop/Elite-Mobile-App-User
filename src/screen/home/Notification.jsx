@@ -3,6 +3,7 @@ import React, {useState, useContext, useEffect} from 'react'
 import {FlatList} from 'react-native';
 import { Authcontext } from '../../context/Authcontext';
 import axios from 'axios';
+import { YOURAPI } from '../../constants/editendpoint';
 
 export default function Notification() {
   const [selectedData, setSelectedData] = useState([]);
@@ -10,11 +11,11 @@ export default function Notification() {
 
   useEffect(() =>{
     try {
-      axios.get(`http://localhost:8000/users/${userInfo.user_id}/noti`)
+      axios.get(`http://${YOURAPI}/users/${userInfo.user_id}/noti`)
         .then((res) => {
           console.log("DataListworkId", res.data);
           Promise.all(res.data.map(noti_id => 
-            axios.get(`http://localhost:8000/users/noti/${noti_id}`)
+            axios.get(`http://${YOURAPI}/users/noti/${noti_id}`)
           ))
           .then(responses => {
             const workData = responses.map(response => response.data);

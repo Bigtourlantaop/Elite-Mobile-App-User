@@ -4,6 +4,7 @@ import {FlatList} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Authcontext } from '../../context/Authcontext';
 import axios from 'axios';
+import { YOURAPI } from '../../constants/editendpoint';
 
 
 
@@ -16,11 +17,11 @@ export default function Job() {
 
   useEffect(() =>{
     try {
-      axios.get(`http://localhost:8000/users/${userInfo.user_id}/works`)
+      axios.get(`http://${YOURAPI}/users/${userInfo.user_id}/works`)
         .then((res) => {
           console.log("DataListworkId", res.data);
           Promise.all(res.data.work_list.map(work_id => 
-            axios.get(`http://localhost:8000/users/${userInfo.user_id}/works/${work_id}`)
+            axios.get(`http://${YOURAPI}/users/${userInfo.user_id}/works/${work_id}`)
           ))
           .then(responses => {
             const workData = responses.map(response => response.data);

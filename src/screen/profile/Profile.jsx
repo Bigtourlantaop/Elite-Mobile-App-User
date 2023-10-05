@@ -3,6 +3,7 @@ import React, {useContext, useState, useEffect} from 'react'
 import { Authcontext } from '../../context/Authcontext';
 import axios from 'axios';
 import { useFocusEffect } from '@react-navigation/native';
+import { YOURAPI } from '../../constants/editendpoint';
 
 export default function Profile({navigation}) {
   const [data, setData] = useState([]);
@@ -12,7 +13,7 @@ export default function Profile({navigation}) {
     React.useCallback(() => {
       const fetchData = async () => {
         try {
-          const response = await axios.get(`http://localhost:8000/users/${userInfo.user_id}`);
+          const response = await axios.get(`http://${YOURAPI}/users/${userInfo.user_id}`);
           setData(response.data);
         } catch (error) {
           console.error('Error fetching user data:', error);

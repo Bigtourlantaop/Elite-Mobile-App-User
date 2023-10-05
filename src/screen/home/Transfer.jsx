@@ -7,12 +7,6 @@ import{
     Image,
 }from "react-native";
 
-const handlePress = () => {
-  if (onPress){
-    navigation.navigate('เลขบช');
-  }
-  }
-
 const Transfer =({navigation})=>{
    
     function renderbank(){

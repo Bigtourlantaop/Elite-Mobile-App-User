@@ -4,6 +4,7 @@ import React, {useState, useEffect} from 'react';
 import { View, Image, Text, StyleSheet, SafeAreaView, TouchableOpacity} from 'react-native';
 import { ScrollView , FlatList} from 'react-native';
 import axios from 'axios';
+import { YOURAPI } from '../../constants/editendpoint';
 
 const Home = () => {
   const navigation = useNavigation();
@@ -11,7 +12,7 @@ const Home = () => {
   const [dateData, setDateData] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:8000/12datenext')
+    axios.get(`http://${YOURAPI}/12datenext`)
       .then((res) => {
         setDateData(res.data.next12Days);
       })
@@ -21,10 +22,10 @@ const Home = () => {
   }, []);
 
   function newData(chose) {
-    axios.get(`http://localhost:8000/work_date/${chose}`)
+    axios.get(`http://${YOURAPI}/work_date/${chose}`)
       .then((res) => {
         Promise.all(res.data.work_list.map(_id => 
-          axios.get(`http://localhost:8000/works/${_id}`)
+          axios.get(`http://${YOURAPI}/works/${_id}`)
         ))
         .then(responses => {
           const workData = responses.map(response => response.data);

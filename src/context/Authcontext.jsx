@@ -1,6 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import React, {createContext, useEffect, useState} from "react";
+import { YOURAPI } from "../constants/editendpoint";
 
 export const Authcontext = createContext();
 
@@ -11,7 +12,7 @@ export const AuthProvider = ({children}) => {
 
     const login = (username, password) => {
         setIsLoading(true)
-        axios.post('http://localhost:8000/users/login', {
+        axios.post(`http://${YOURAPI}/users/login`, {
             username,
             password
         })

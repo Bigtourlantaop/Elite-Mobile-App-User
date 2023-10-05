@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity} from 'react-nat
 import { FlatList} from 'react-native';
 import { Authcontext } from '../../context/Authcontext';
 import axios from 'axios';
+import { YOURAPI } from '../../constants/editendpoint';
 
 const Income = ({ navigation }) => {
   const [hasFetchedData, setHasFetchedData] = useState(false);
@@ -50,7 +51,7 @@ const Income = ({ navigation }) => {
 
 useEffect(() => {
   if (!hasFetchedData) {
-    axios.get(`http://localhost:8000/users/${userInfo.user_id}`)
+    axios.get(`http://${YOURAPI}/users/${userInfo.user_id}`)
       .then((res) => {
         console.log("Data", res.data);
         setData(res.data);
