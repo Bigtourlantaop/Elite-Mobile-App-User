@@ -19,13 +19,11 @@ export default function Job() {
     try {
       axios.get(`http://${YOURAPI}/users/${userInfo.user_id}/works`)
         .then((res) => {
-          console.log("DataListworkId", res.data);
           Promise.all(res.data.work_list.map(work_id => 
             axios.get(`http://${YOURAPI}/users/${userInfo.user_id}/works/${work_id}`)
           ))
           .then(responses => {
             const workData = responses.map(response => response.data);
-            console.log("Work Data", workData);
             setSelectedData(workData);
           })
           .catch(error => {
@@ -56,7 +54,7 @@ export default function Job() {
       case 'เสร็จ':
         return 'red';
       default:
-        return 'white';
+        return '#000000';
     }
   };
 
@@ -80,9 +78,12 @@ export default function Job() {
                 style={{ width: 60, height: 80,}}
                 resizeMode='contain'
               />
-              <Text style={{margin:10, flexGrow:2}}>ชื่อ : {item.work_detail.name}{'\n'}เวลา : {item.work_detail.start_time} - {item.work_detail.end_time}{'\n'}ตำแหน่ง : {item.work_detail.type_of_work}</Text>
+              <View style={{flexGrow: 2}}>
+                <View style={{width: 200, marginLeft: 5}}>
+                  <Text>{item.work_detail.name}</Text>
+                </View>
+              </View>
               <View style={{flexDirection:'column', alignItems:'center'}}>
-                <Text style={{marginVertical: 5}}>{item.work_detail.hourly_income} เครดิต/ชั่วโมง</Text>
                 <View style={{backgroundColor: '#FAF2D3', width: 50, justifyContent: 'center', alignItems: 'center', height : 30, borderRadius: 5}}>
                   <Text style={{color: getStatusColor(item.status)}}>{item.status}</Text>
                 </View>

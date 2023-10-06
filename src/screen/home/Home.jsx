@@ -73,11 +73,11 @@ const Home = () => {
         }
         renderItem={({ item }) => (
           <TouchableOpacity onPress={() => {navigation.navigate('รายละเอียดงาน',{ item })}}>
-            <View style={{alignItems:'center',flexDirection: 'row', margin:10, borderBottomWidth:1}}>
+            <View style={{alignItems:'center',flexDirection: 'row', margin:10, backgroundColor: '#D0E7D2', borderRadius: 10, paddingHorizontal: 5}}>
               <View style={{
-                height: 60,
-                width: 60,
-                borderRadius: 30, 
+                height: 80,
+                width: 80,
+                borderRadius: 40, 
                 overflow: 'hidden'
               }}>
                 <Image 
@@ -86,8 +86,19 @@ const Home = () => {
                   resizeMode='contain'
                 />
               </View>
-              <Text style={{margin:10, flexGrow:2}}>ชื่อ : {item.name}{'\n'}เวลา : {item.start_time} - {item.end_time}{'\n'}ตำแหน่ง : {item.type_of_work}</Text>
-              <Text>{item.hourly_income} เครดิต/ชั่วโมง</Text>
+              <View style={{margin: 10,width: 275, paddingHorizontal: 5}}>
+                <Text style={{fontSize: 20, fontWeight: '500'}}>{item.name}</Text>
+                <Text style={{fontSize: 17}}>เวลาทำงาน : {item.start_time} - {item.end_time}</Text>
+                <View style={{alignItems: 'center',flexDirection: 'row', borderWidth: 1, width: 80, height: 63, borderRadius: 20, marginTop: 5, padding: 5, backgroundColor: '#79AC78', borderColor: '#B0D9B1'}}>
+                  <Text style={{position: 'relative', fontSize: 20, fontWeight: '600', color: '#ffffff'}}>{item.hourly_income}</Text>
+                  <View style={{position: 'relative', marginLeft: 2}}>
+                    <Text>เครดิต{'\n'}/ชั่วโมง</Text>
+                  </View>
+                  <View style={{borderRadius: 20, height: 40, width: 120, borderWidth: 1, marginLeft: 13, padding: 5, alignItems: 'center', justifyContent: 'center', backgroundColor: '#79AC78', borderColor: '#B0D9B1'}}>
+                    <Text style={{color: 'white'}}>{item.type_of_work}</Text>
+                  </View>
+                </View>
+              </View>
             </View>
           </TouchableOpacity>
         )}

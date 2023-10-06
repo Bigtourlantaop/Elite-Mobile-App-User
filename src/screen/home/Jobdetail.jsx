@@ -3,10 +3,13 @@ import React, { useContext } from 'react';
 import { View, Text, Image, Button, StyleSheet, ScrollView } from 'react-native';
 
 const Jobdetail = ({ route }) => {
-  const { name, start_time, end_time ,type_of_work, hourly_income, image } = route.params.item;
+  const { name, start_time, end_time ,type_of_work, hourly_income, image, work_description } = route.params.item;
+  const myDetail = work_description.detail
+  const myQualification = work_description.qualification
   const navigation = useNavigation();
 
   return (
+  <View style={{flex: 1, backgroundColor: 'white'}}>
     <ScrollView style={{marginBottom: 60}}>
       <View style={{flexDirection : 'row', marginBottom: 20, marginTop: 20, justifyContent:'center', alignItems: 'center'}}>
         <Image
@@ -22,23 +25,14 @@ const Jobdetail = ({ route }) => {
       </View>
       <View style={styles.textContainer}>
         <Text style = {{fontSize : 19}}>รายละเอียดงาน</Text>
-        <View style={{marginLeft: 10, marginTop:5}}>
-          <Text>1.ช่วยเหลืองานอื่นๆภายในร้าน เช่น เสิร์ฟอาหาร ล้างจาน เป็นต้น</Text>
-          <Text>2.พนักงานครัว ทำงานต่างๆในครัว จัดเตรียมอาหาร</Text>
-          <Text>3.ทำงานอื่นๆที่ได้รัมอบหมายจากผู้บังคับบัญชา</Text>
+        <View style={{marginLeft: 10, marginTop:5, flex: 1}}>
+          <Text>{myDetail}</Text>
         </View>
       </View>
         <View style={styles.textContainer}>
           <Text style = {{fontSize : 19}}>คุณสมบัติผู้สมัคร</Text>
           <View style={{marginLeft: 10, marginTop:5}}>
-            <Text>1.ชาย-หญิง</Text>
-            <Text>2.สัญชาติไทย</Text>
-            <Text>3.อายุ 18-35 ปี</Text>
-            <Text>4.ไม่จำเป็นต้องมีประสบการณ์</Text>
-            <Text>5.กระตือรือร้นในการทำงาน รอบคอบ คล่องแคล่ว ซื่อสัตย์</Text>
-            <Text>6.มีมนุษย์สัมพันธ์ดี ทำงานร่วมกับผู้อื่นได้</Text>
-            <Text>7.มีใจรักในงานบริการ</Text>
-            <Text>8.มีบุคลิกดี ทัศนคติดี</Text>
+            <Text>{myQualification}</Text>
           </View>
         </View>
       <View style={{ marginVertical:10}}>
@@ -46,6 +40,7 @@ const Jobdetail = ({ route }) => {
         <Button title="สมัครงาน" onPress={() => {}}/>
       </View>
     </ScrollView>
+  </View>
   );
 }
 
@@ -64,6 +59,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginBottom: 20,
     marginHorizontal: 25,
+    flex: 1
   },
   text: {
     color: 'black',
