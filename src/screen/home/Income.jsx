@@ -64,33 +64,41 @@ useEffect(() => {
 }, [hasFetchedData]);
 
   return (
-    <SafeAreaView style={{backgroundColor: 'white', flex:1}}>
-      <View style={{padding:10}}>
-        <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-          <View style={styles.circle}>
-            <Text style={styles.text}>ยอดเงินคงเหลือ</Text>
-            <Text style={styles.textnum}>{data.credit}</Text>
+    <View style={{flex: 1, backgroundColor: 'white'}}>
+      <SafeAreaView style={{backgroundColor: 'white', margin: 25,}}>
+        <View style={{padding:10}}>
+          <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+            <View style={styles.circle}>
+              <Text style={styles.text}>ยอดเงินคงเหลือ</Text>
+              <Text style={styles.textnum}>{data.credit}</Text>
+            </View>
           </View>
         </View>
-      </View>
-      <TouchableOpacity onPress={() => {navigation.navigate('โอนเงิน')}} style={{marginHorizontal:13}}>
-        <View style = {styles.butt}>
-          <Text style = {styles.textbutton}>Transfer</Text>
-        </View>
-      </TouchableOpacity>
-      <Text style={{marginTop:10, marginLeft:10, marginBottom:10, color:'black',fontSize: 20}}>รายการล่าสุด</Text>
-      <FlatList
-        data={dataDeatail}
-        contentContainerStyle={{ paddingBottom: 60}}
-        keyExtractor={(item,index) => index.toString()}
-        renderItem={({ item }) => (
-          <View style={{flexDirection: 'row',marginBottom:10, backgroundColor: '#bdbdbd', alignItems:'center'}}>
-            <Text style={{flexGrow:2, fontSize:20, marginLeft: 5, marginTop: 15}}>{item.date}{'\n'}{item.time}{'\n'}</Text>
-            <Text style = {{fontSize:25,color:'blue', marginRight: 5}}>{item.credit}</Text>
+        <TouchableOpacity onPress={() => {navigation.navigate('โอนเงิน')}} style={{marginHorizontal:13}}>
+          <View style = {styles.butt}>
+            <Text style = {styles.textbutton}>Transfer</Text>
           </View>
-        )}
-      />
-    </SafeAreaView>
+        </TouchableOpacity>
+        <Text style={{marginTop:10, marginLeft:10, marginBottom:10, color:'black',fontSize: 20}}>รายการล่าสุด</Text>
+        <FlatList
+          data={dataDeatail}
+          contentContainerStyle={{ paddingBottom: 350}}
+          showsVerticalScrollIndicator={false}
+          keyExtractor={(item,index) => index.toString()}
+          renderItem={({ item }) => (
+            <View style={{flexDirection: 'row',marginBottom:10, backgroundColor: '#D7E5CA', alignItems:'center', borderRadius: 20, justifyContent: 'center', padding: 5}}>
+              <View style={{flexGrow: 2, padding: 10}}>
+                <Text>{item.date}</Text>
+                <Text>{item.time}</Text>
+              </View>
+              <View style={{marginRight: 20}}>
+                <Text>{item.credit}</Text>
+              </View>
+            </View>
+          )}
+        />
+      </SafeAreaView>
+    </View>
   );
 };
 
@@ -101,7 +109,7 @@ const styles = StyleSheet.create({
     borderRadius: 100, // ค่าความโค้งของขอบวงกลมเท่ากับครึ่งหนึ่งของความกว้างหรือความสูง
     backgroundColor: '#fafafa', // สีพื้นหลังของวงกลม
     borderWidth: 4,
-    borderColor: '#1a237e',
+    borderColor: '#618264',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -118,7 +126,7 @@ const styles = StyleSheet.create({
   butt: {
     width: 90, // กำหนดความกว้างของวงกลม
     height: 45, // กำหนดความสูงของวงกลม
-    backgroundColor: '#e0e0e0',
+    backgroundColor: '#79AC78',
     alignSelf: 'flex-start',
     margin:10,
     borderRadius: 10,

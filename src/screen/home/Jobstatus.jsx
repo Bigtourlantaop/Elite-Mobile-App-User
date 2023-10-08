@@ -3,48 +3,64 @@ import React from 'react';
 import { View, Text, Image, Button, StyleSheet, ScrollView } from 'react-native';
 
 const Jobstatus = ({ route }) => {
-  const { name, time, position, credit, state, color } = route.params.item;
+  const Status = route.params.item.status
+  const { name, start_time, end_time, type_of_work, credit, state, color, image } = route.params.item.work_detail;
+  const myDetail = route.params.item.work_detail.work_description.detail
+  const myQualification = route.params.item.work_detail.work_description.qualification
   const navigation = useNavigation();
 
+  const getStatusColor = (status) => {
+    switch (status) {
+      case 'กำลังทำ':
+        return 'green';
+      case 'รอ':
+        return '#E9B824';
+      case 'เสร็จ':
+        return 'red';
+      default:
+        return '#000000';
+    }
+  };
+
   return (
-    <ScrollView style={{marginBottom: 100}}>
+    <ScrollView style={{flex: 1, backgroundColor: 'white'}}>
       <View style={{flexDirection : 'row' ,marginHorizontal: 10, marginBottom: 20, marginTop: 20, justifyContent:'center'}}>
-        <Image
-          source={require('../../assets/image/TeeNoi.png')}
-          style={styles.image}
-        />
-        <View style={{padding: 30}}>
+        <View style={{
+          height: 150,
+          width: 150,
+          borderRadius: 40, 
+          marginRight: 10,
+          overflow: 'hidden'
+          }}>
+            <Image 
+              source={{uri: image}} 
+              style={{ flex: 1, width: null, height: null,}}
+              resizeMode='contain'
+            />
+        </View>
+        <View style={{padding: 5, width: 175}}>
           <Text style = {{fontSize : 25}}>{name}</Text>
-          <Text>   {time}</Text>
-          <Text style ={{color: 'red' }}>   {position}</Text>
-          <Text>   {credit} เครดิต/ชั่วโมง</Text>
+          <Text>{start_time} - {end_time}</Text>
+          <Text style ={{color: 'red' }}>{type_of_work}</Text>
+          <Text>{credit} เครดิต/ชั่วโมง</Text>
         </View>
       </View>
       <View style={styles.textContainer}>
         <Text style = {{fontSize : 19}}>รายละเอียดงาน</Text>
         <View style={{marginLeft: 10, marginTop:5}}>
-          <Text>1.ช่วยเหลืองานอื่นๆภายในร้าน เช่น เสิร์ฟอาหาร ล้างจาน เป็นต้น</Text>
-          <Text>2.พนักงานครัว ทำงานต่างๆในครัว จัดเตรียมอาหาร</Text>
-          <Text>3.ทำงานอื่นๆที่ได้รัมอบหมายจากผู้บังคับบัญชา</Text>
+          <Text>{myDetail}</Text>
         </View>
       </View>
         <View style={styles.textContainer}>
           <Text style = {{fontSize : 19}}>คุณสมบัติผู้สมัคร</Text>
           <View style={{marginLeft: 10, marginTop:5}}>
-            <Text>1.ชาย-หญิง</Text>
-            <Text>2.สัญชาติไทย</Text>
-            <Text>3.อายุ 18-35 ปี</Text>
-            <Text>4.ไม่จำเป็นต้องมีประสบการณ์</Text>
-            <Text>5.กระตือรือร้นในการทำงาน รอบคอบ คล่องแคล่ว ซื่อสัตย์</Text>
-            <Text>6.มีมนุษย์สัมพันธ์ดี ทำงานร่วมกับผู้อื่นได้</Text>
-            <Text>7.มีใจรักในงานบริการ</Text>
-            <Text>8.มีบุคลิกดี ทัศนคติดี</Text>
+            <Text>{myQualification}</Text>
           </View>
         </View>
-        <View style={{justifyContent:'center', alignItems:'center', marginTop:20, marginHorizontal: 20, borderWidth:1, height:50, borderRadius:10, backgroundColor: color, borderColor: '#ffffff' }}>
-            <Text style={{color: 'white', fontSize: 19}}>{state}</Text>
+        <View style={{justifyContent:'center', alignItems:'center', marginTop:20, marginHorizontal: 20, borderWidth:1, height:50, borderRadius:10, backgroundColor: getStatusColor(Status), borderColor: '#ffffff' }}>
+            <Text style={{color: 'white', fontSize: 19}}>{Status}</Text>
         </View>
-      <View style={{ marginVertical:10}}>
+      <View style={{ marginVertical:10, marginBottom: 100}}>
         <Button title="ย้อนกลับ" onPress={() => {navigation.goBack()}}></Button>
       </View>
     </ScrollView>

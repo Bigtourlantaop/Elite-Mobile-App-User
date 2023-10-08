@@ -50,7 +50,7 @@ export default function Job() {
       case 'กำลังทำ':
         return 'green';
       case 'รอ':
-        return '#132043';
+        return '#E9B824';
       case 'เสร็จ':
         return 'red';
       default:
@@ -58,6 +58,7 @@ export default function Job() {
     }
   };
 
+  console.log(selectedData);
   return (
     <SafeAreaView style={{backgroundColor: 'white', flex:1}}>
       <FlatList
@@ -72,20 +73,29 @@ export default function Job() {
         )}
         renderItem={({ item }) => (
           <TouchableOpacity onPress={() => {navigation.navigate('statusjob', {item})}}>
-            <View style={{alignItems:'center',flexDirection: 'row', margin:10, borderBottomWidth:1}}>
-              <Image 
-                source={require('../../assets/image/TeeNoi.png')} 
-                style={{ width: 60, height: 80,}}
-                resizeMode='contain'
-              />
-              <View style={{flexGrow: 2}}>
+            <View style={{alignItems:'center',flexDirection: 'row', margin:10, borderRadius: 20, paddingHorizontal: 10, backgroundColor: '#C1D8C3', paddingVertical: 7}}>
+              <View style={{
+              height: 80,
+              width: 80,
+              borderRadius: 40, 
+              overflow: 'hidden'
+              }}>
+                <Image 
+                  source={{uri: item.work_detail.image}} 
+                  style={{ flex: 1, width: null, height: null,}}
+                  resizeMode='contain'
+                />
+              </View>
+              <View style={{flexGrow: 2,}}>
                 <View style={{width: 200, marginLeft: 5}}>
-                  <Text>{item.work_detail.name}</Text>
+                  <Text style={{fontSize: 20, fontWeight: '500'}}>{item.work_detail.name}</Text>
+                  <Text style={{}}>วันทำงาน : {item.work_detail.work_date}</Text>
+                  <Text style={{}}>ตำแหน่ง : {item.work_detail.type_of_work}</Text>
                 </View>
               </View>
               <View style={{flexDirection:'column', alignItems:'center'}}>
-                <View style={{backgroundColor: '#FAF2D3', width: 50, justifyContent: 'center', alignItems: 'center', height : 30, borderRadius: 5}}>
-                  <Text style={{color: getStatusColor(item.status)}}>{item.status}</Text>
+                <View style={{backgroundColor: getStatusColor(item.status), width: 50, justifyContent: 'center', alignItems: 'center', height : 30, borderRadius: 5}}>
+                  <Text style={{color: 'white'}}>{item.status}</Text>
                 </View>
               </View>
             </View>
