@@ -3,9 +3,9 @@ import { StyleSheet, View, Text } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 
 const data = [
-  { label: 'M', value: '1' },
-  { label: 'F', value: '2' },
-  { label: 'ไม่ระบุ', value: '3'},
+  { label: 'ผู้ชาย', value: '1' },
+  { label: 'ผู้หญิง', value: '2' },
+  { label: 'ไม่ระบุเพศ', value: '3'},
 ];
 
 const DropDownsex = ({onValueChange}) => {
