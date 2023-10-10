@@ -1,10 +1,25 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useContext } from 'react';
 import { View, Text, Image, Button, StyleSheet, ScrollView } from 'react-native';
+import { Authcontext } from '../../context/Authcontext';
+import axios from 'axios';
+import { YOURAPI } from '../../constants/editendpoint';
 
 const Jobdetail = ({ route }) => {
   const { name, start_time, end_time ,type_of_work, hourly_income, image, work_description } = route.params.item;
   const navigation = useNavigation();
+  const _id = route.params.item._id
+  const {userInfo} = useContext(Authcontext)
+  const Apply_job = () =>{
+    axios.patch(`http://${YOURAPI}/users/${userInfo.user_id}/apply/${_id}`, _id)
+    .then(response => {
+      console.log('Apply successfully', response.data);
+      navigation.navigate('pageHome');
+    })
+    .catch(error => {
+      console.error('Error sending data:', error);
+    });
+  };
   return (
   <View style={{flex: 1, backgroundColor: 'white'}}>
     <ScrollView style={{marginBottom: 60}}>
@@ -34,7 +49,7 @@ const Jobdetail = ({ route }) => {
         </View>
       <View style={{ marginVertical:10}}>
         <Button title="ย้อนกลับ" onPress={() => {navigation.goBack()}}></Button>
-        <Button title="สมัครงาน" onPress={() => {}}/>
+        <Button title="สมัครงาน" onPress={() => {Apply_job()}}/>
       </View>
     </ScrollView>
   </View>
