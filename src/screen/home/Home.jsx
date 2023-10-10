@@ -89,12 +89,12 @@ const Home = () => {
               <View style={{margin: 10,width: 275, paddingHorizontal: 5}}>
                 <Text style={{fontSize: 20, fontWeight: '500'}}>{item.name}</Text>
                 <Text style={{fontSize: 17}}>เวลาทำงาน : {item.start_time} - {item.end_time}</Text>
-                <View style={{alignItems: 'center',flexDirection: 'row', borderWidth: 1, width: 80, height: 63, borderRadius: 20, marginTop: 5, padding: 5, backgroundColor: '#79AC78', borderColor: '#B0D9B1'}}>
+                <View style={{alignItems: 'center',flexDirection: 'row', borderWidth: 1, width: 89, height: 63, borderRadius: 20, marginTop: 5, padding: 5, backgroundColor: '#79AC78', borderColor: '#B0D9B1'}}>
                   <Text style={{position: 'relative', fontSize: 20, fontWeight: '600', color: '#ffffff'}}>{item.hourly_income}</Text>
                   <View style={{position: 'relative', marginLeft: 2}}>
                     <Text>เครดิต{'\n'}/ชั่วโมง</Text>
                   </View>
-                  <View style={{borderRadius: 20, height: 40, width: 120, borderWidth: 1, marginLeft: 13, padding: 5, alignItems: 'center', justifyContent: 'center', backgroundColor: '#79AC78', borderColor: '#B0D9B1'}}>
+                  <View style={{borderRadius: 20, height: 40, width: 120, borderWidth: 1, marginLeft: 15, padding: 5, alignItems: 'center', justifyContent: 'center', backgroundColor: '#79AC78', borderColor: '#B0D9B1'}}>
                     <Text style={{color: 'white'}}>{item.type_of_work}</Text>
                   </View>
                 </View>

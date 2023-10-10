@@ -4,10 +4,7 @@ import { View, Text, Image, Button, StyleSheet, ScrollView } from 'react-native'
 
 const Jobdetail = ({ route }) => {
   const { name, start_time, end_time ,type_of_work, hourly_income, image, work_description } = route.params.item;
-  const myDetail = work_description.detail
-  const myQualification = work_description.qualification
   const navigation = useNavigation();
-
   return (
   <View style={{flex: 1, backgroundColor: 'white'}}>
     <ScrollView style={{marginBottom: 60}}>
@@ -18,21 +15,21 @@ const Jobdetail = ({ route }) => {
         />
         <View style={{padding: 10}}>
           <Text style = {{fontSize : 25, flexShrink: 1}} numberOfLines={1}>{name.length > 15 ? name.substring(0, 15) + '...' : name}</Text>
-          <Text>   {start_time} - {end_time}</Text>
-          <Text style ={{color: 'red' }}>   {type_of_work}</Text>
-          <Text>   {hourly_income} เครดิต/ชั่วโมง</Text>
+          <Text>{start_time} - {end_time}</Text>
+          <Text style ={{color: 'red' }}>{type_of_work}</Text>
+          <Text>{hourly_income} เครดิต/ชั่วโมง</Text>
         </View>
       </View>
       <View style={styles.textContainer}>
         <Text style = {{fontSize : 19}}>รายละเอียดงาน</Text>
         <View style={{marginLeft: 10, marginTop:5, flex: 1}}>
-          <Text>{myDetail}</Text>
+          <Text>{work_description.detail.split('\\n').map((item, key) => <Text key={key}>{item}{'\n'}</Text>)}</Text>
         </View>
       </View>
         <View style={styles.textContainer}>
           <Text style = {{fontSize : 19}}>คุณสมบัติผู้สมัคร</Text>
           <View style={{marginLeft: 10, marginTop:5}}>
-            <Text>{myQualification}</Text>
+            <Text>{work_description.qualification.split('\\n').map((item, key) => <Text key={key}>{item}{'\n'}</Text>)}</Text>
           </View>
         </View>
       <View style={{ marginVertical:10}}>
