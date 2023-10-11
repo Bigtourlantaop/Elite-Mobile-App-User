@@ -10,6 +10,7 @@ const Home = () => {
   const navigation = useNavigation();
   const [selectedData, setSelectedData] = useState([]);
   const [dateData, setDateData] = useState([]);
+  const [daydate, setDaydate] = useState("เลือกวันด้านล่าง")
 
   useEffect(() => {
     axios.get(`http://${YOURAPI}/12datenext`)
@@ -19,9 +20,10 @@ const Home = () => {
       .catch(e => {
         console.error('Error', e);
       });
-  }, []);
+  },[]);
 
   function newData(chose) {
+    setDaydate(chose)
     axios.get(`http://${YOURAPI}/work_date/${chose}`)
       .then((res) => {
         Promise.all(res.data.work_list.map(_id => 
@@ -55,7 +57,7 @@ const Home = () => {
         ListHeaderComponent={
           <>
             <View style={{margin:10, padding:5}}>
-              <Text style={{color:'#000000', fontSize:17}}>Day</Text>
+              <Text style={{color:'#000000', fontSize:17}}>Day : {daydate}</Text>
             </View>
             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
               {dateData.map(day => (
@@ -72,35 +74,37 @@ const Home = () => {
           </>
         }
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => {navigation.navigate('รายละเอียดงาน',{ item })}}>
-            <View style={{alignItems:'center',flexDirection: 'row', margin:10, backgroundColor: '#D0E7D2', borderRadius: 10, paddingHorizontal: 5}}>
-              <View style={{
-                height: 80,
-                width: 80,
-                borderRadius: 40, 
-                overflow: 'hidden'
-              }}>
-                <Image 
-                  source={{uri : item.image}} 
-                  style={{flex: 1, height: null, width: null}}
-                  resizeMode='contain'
-                />
-              </View>
-              <View style={{margin: 10,width: 275, paddingHorizontal: 5}}>
-                <Text style={{fontSize: 20, fontWeight: '500'}}>{item.name}</Text>
-                <Text style={{fontSize: 17}}>เวลาทำงาน : {item.start_time} - {item.end_time}</Text>
-                <View style={{alignItems: 'center',flexDirection: 'row', borderWidth: 1, width: 89, height: 63, borderRadius: 20, marginTop: 5, padding: 5, backgroundColor: '#79AC78', borderColor: '#B0D9B1'}}>
-                  <Text style={{position: 'relative', fontSize: 20, fontWeight: '600', color: '#ffffff'}}>{item.hourly_income}</Text>
-                  <View style={{position: 'relative', marginLeft: 2}}>
-                    <Text>เครดิต{'\n'}/ชั่วโมง</Text>
-                  </View>
-                  <View style={{borderRadius: 20, height: 40, width: 120, borderWidth: 1, marginLeft: 15, padding: 5, alignItems: 'center', justifyContent: 'center', backgroundColor: '#79AC78', borderColor: '#B0D9B1'}}>
-                    <Text style={{color: 'white'}}>{item.type_of_work}</Text>
+          <>
+            <TouchableOpacity onPress={() => {navigation.navigate('รายละเอียดงาน',{ item })}}>
+              <View style={{alignItems:'center',flexDirection: 'row', margin:10, backgroundColor: '#D0E7D2', borderRadius: 10, paddingHorizontal: 5}}>
+                <View style={{
+                  height: 80,
+                  width: 80,
+                  borderRadius: 40, 
+                  overflow: 'hidden'
+                }}>
+                  <Image 
+                    source={{uri : item.image}} 
+                    style={{flex: 1, height: null, width: null}}
+                    resizeMode='contain'
+                  />
+                </View>
+                <View style={{margin: 10,width: 275, paddingHorizontal: 5}}>
+                  <Text style={{fontSize: 20, fontWeight: '500'}}>{item.name}</Text>
+                  <Text style={{fontSize: 17}}>เวลาทำงาน : {item.start_time} - {item.end_time}</Text>
+                  <View style={{alignItems: 'center',flexDirection: 'row', borderWidth: 1, width: 89, height: 63, borderRadius: 20, marginTop: 5, padding: 5, backgroundColor: '#79AC78', borderColor: '#B0D9B1'}}>
+                    <Text style={{position: 'relative', fontSize: 20, fontWeight: '600', color: '#ffffff'}}>{item.hourly_income}</Text>
+                    <View style={{position: 'relative', marginLeft: 2}}>
+                      <Text>เครดิต{'\n'}/ชั่วโมง</Text>
+                    </View>
+                    <View style={{borderRadius: 20, height: 40, width: 120, borderWidth: 1, marginLeft: 15, padding: 5, alignItems: 'center', justifyContent: 'center', backgroundColor: '#79AC78', borderColor: '#B0D9B1'}}>
+                      <Text style={{color: 'white'}}>{item.type_of_work}</Text>
+                    </View>
                   </View>
                 </View>
               </View>
-            </View>
-          </TouchableOpacity>
+            </TouchableOpacity>
+          </>
         )}
       />
     </SafeAreaView>

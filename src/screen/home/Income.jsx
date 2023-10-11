@@ -4,6 +4,7 @@ import { FlatList} from 'react-native';
 import { Authcontext } from '../../context/Authcontext';
 import axios from 'axios';
 import { YOURAPI } from '../../constants/editendpoint';
+import { formatNumberWithCommas } from '../../components/formatNumberWithCommas';
 
 const Income = ({ navigation }) => {
   const [hasFetchedData, setHasFetchedData] = useState(false);
@@ -53,7 +54,6 @@ useEffect(() => {
   if (!hasFetchedData) {
     axios.get(`http://${YOURAPI}/users/${userInfo.user_id}`)
       .then((res) => {
-        console.log("Data", res.data);
         setData(res.data);
         setHasFetchedData(true);
       })
@@ -70,7 +70,7 @@ useEffect(() => {
           <View style={{flexDirection: 'row', justifyContent: 'center'}}>
             <View style={styles.circle}>
               <Text style={styles.text}>ยอดเงินคงเหลือ</Text>
-              <Text style={styles.textnum}>{data.credit}</Text>
+              <Text style={styles.textnum}>{(data.credit)}</Text>
             </View>
           </View>
         </View>
