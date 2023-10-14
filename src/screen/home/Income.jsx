@@ -4,77 +4,46 @@ import { FlatList} from 'react-native';
 import { Authcontext } from '../../context/Authcontext';
 import axios from 'axios';
 import { YOURAPI } from '../../constants/editendpoint';
-import { formatNumberWithCommas } from '../../components/formatNumberWithCommas';
+import { useFocusEffect } from '@react-navigation/native';
 
 const Income = ({ navigation }) => {
-  const [hasFetchedData, setHasFetchedData] = useState(false);
-  const [data, setData] = useState([]);
+  const [money, setmoney] = useState([]);
   const {userInfo} = useContext(Authcontext)
+  const [dataDeatail, setDataDeatail] = useState([])
 
-  const dataDeatail = ([
-    {date: '6 ม.ค. 66',
-     time: '16.00',
-     credit: '+50.00'
-    },
-    {date: '5 ม.ค. 66',
-    time: '16.00',
-    credit: '+50.00'
-    },
-    {date: '4 ม.ค. 66',
-    time: '16.00',
-    credit: '+50.00'
-    },
-    {date: '3 ม.ค. 66',
-    time: '16.00',
-    credit: '+50.00'
-    },
-    {date: '2 ม.ค. 66',
-    time: '16.00',
-    credit: '+50.00'
-    },
-    {date: '6 ม.ค. 66',
-    time: '16.00',
-    credit: '+50.00'
-    },
-    {date: '1 ม.ค. 66',
-    time: '16.00',
-    credit: '+50.00'
-    },
-    {date: '31 ธ.ค. 66',
-    time: '16.00',
-    credit: '+50.00'
-    },
-    {date: '30 ธ.ค. 66',
-    time: '16.00',
-    credit: '+50.00'
-    }
-]);
-
-useEffect(() => {
-  if (!hasFetchedData) {
-    axios.get(`http://${YOURAPI}/users/${userInfo.user_id}`)
-      .then((res) => {
-        setData(res.data);
-        setHasFetchedData(true);
-      })
-      .catch(e => {
-        console.error('Error', e);
-      });
-  }
-}, [hasFetchedData]);
+  useFocusEffect(
+    React.useCallback(() => {
+      const fetchData = async () => {
+        try {
+          const response = await axios.get(`http://${YOURAPI}/users/${userInfo.user_id}`);
+          setmoney(response.data.credit);
+          const Listex = await axios.get(`http://${YOURAPI}/users/${userInfo.user_id}/money_exchange`)
+          const dataListex = Listex.data
+          const promises = dataListex.map(id => axios.get(`http://${YOURAPI}/money_exchange/${id}`));
+          const responses = await Promise.all(promises);
+          const mylistex = responses.map(res => res.data);
+          setDataDeatail(mylistex);
+        } catch (error) {
+          console.error('Error', error);
+        }
+      };
+      fetchData();
+    }, [userInfo.user_id])
+  );
+  
 
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
-      <SafeAreaView style={{backgroundColor: 'white', margin: 25,}}>
-        <View style={{padding:10}}>
+      <SafeAreaView style={{backgroundColor: 'white', margin: 15,}}>
+        <View style={{padrding:10}}>
           <View style={{flexDirection: 'row', justifyContent: 'center'}}>
             <View style={styles.circle}>
               <Text style={styles.text}>ยอดเงินคงเหลือ</Text>
-              <Text style={styles.textnum}>{(data.credit)}</Text>
+              <Text style={styles.textnum}>{(money?.toLocaleString() || "")}</Text>
             </View>
           </View>
         </View>
-        <TouchableOpacity onPress={() => {navigation.navigate('โอนเงิน')}} style={{marginHorizontal:13}}>
+        <TouchableOpacity onPress={() => {navigation.navigate('โอนเงิน', money)}} style={{marginHorizontal:13}}>
           <View style = {styles.butt}>
             <Text style = {styles.textbutton}>Transfer</Text>
           </View>
@@ -84,15 +53,15 @@ useEffect(() => {
           data={dataDeatail}
           contentContainerStyle={{ paddingBottom: 350}}
           showsVerticalScrollIndicator={false}
-          keyExtractor={(item,index) => index.toString()}
+          keyExtractor={(item) => item._id}
           renderItem={({ item }) => (
             <View style={{flexDirection: 'row',marginBottom:10, backgroundColor: '#D7E5CA', alignItems:'center', borderRadius: 20, justifyContent: 'center', padding: 5}}>
               <View style={{flexGrow: 2, padding: 10}}>
-                <Text>{item.date}</Text>
-                <Text>{item.time}</Text>
+                <Text>{item.date.slice(0, 10)}</Text>
+                <Text>{item.date.slice(11, 19)}</Text>
               </View>
               <View style={{marginRight: 20}}>
-                <Text>{item.credit}</Text>
+                <Text>{item.credit?.toLocaleString() || ""}</Text>
               </View>
             </View>
           )}
@@ -134,7 +103,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   textbutton: {
-    color: 'black',
+    color: 'white',
     fontSize: 18,
     textAlign: 'center',
   }
