@@ -7,18 +7,12 @@ import{
     Image,
 }from "react-native";
 
-const Transfer =({navigation})=>{
-   
+const Transfer =({navigation, route})=>{
+   const money = route.params;
     function renderbank(){
 
         return(
-            <View>
-                <View style={{alignItems:'center',justifyContent:'center',width:210,height:210,borderRadius:110,backgroundColor:'#73768D',marginTop:30}}>
-                  <View style={{alignItems:'center',justifyContent:'center',width:200,height:200,borderRadius:100,backgroundColor:'#E1F1FF',}}>
-                    <Text style={{fontSize:16,color:'#000'}}>ยอดเงินคงเหลือ</Text>
-                    <Text style={{fontSize:50,color:'#000'}}>1,000</Text>
-                  </View>
-                </View>
+            <View style={{}}>
                 <View  
                  style={{padding:15,
                  flexDirection:'row',
@@ -28,7 +22,7 @@ const Transfer =({navigation})=>{
                  justifyContent:'center'}}
                  >
                 <View>
-                <TouchableOpacity onPress={() => {navigation.navigate('เลขบช')}}
+                <TouchableOpacity onPress={() => {navigation.navigate('เลขบช', money)}}
                     style={{
                         padding:15,
                         flexDirection:'row',
@@ -48,7 +42,7 @@ const Transfer =({navigation})=>{
                 </TouchableOpacity>
                 </View>
                 <View>
-                <TouchableOpacity onPress={() => {navigation.navigate('เลขบช')}}
+                <TouchableOpacity onPress={() => {navigation.navigate('เลขบช', money)}}
                     style={{
                         padding:15,
                         marginLeft:45,
@@ -69,7 +63,7 @@ const Transfer =({navigation})=>{
                 </TouchableOpacity>
                 </View>
                 <View>
-                <TouchableOpacity onPress={() => {navigation.navigate('เลขบช')}}
+                <TouchableOpacity onPress={() => {navigation.navigate('เลขบช', money)}}
                     style={{
                         padding:15,
                         marginLeft:45,
@@ -90,7 +84,7 @@ const Transfer =({navigation})=>{
                 </TouchableOpacity>
                 </View>
                 <View>
-                <TouchableOpacity onPress={() => {navigation.navigate('เลขบช')}}
+                <TouchableOpacity onPress={() => {navigation.navigate('เลขบช', money)}}
                     style={{
                         padding:15,
                         marginLeft:45,
@@ -122,7 +116,7 @@ const Transfer =({navigation})=>{
                  justifyContent:'center'}}
                  >
                 <View>
-                <TouchableOpacity onPress={() => {navigation.navigate('เลขบช')}}
+                <TouchableOpacity onPress={() => {navigation.navigate('เลขบช', money)}}
                     style={{
                         padding:15,
                         flexDirection:'row',
@@ -142,7 +136,7 @@ const Transfer =({navigation})=>{
                 </TouchableOpacity>
                 </View>
                 <View>
-                <TouchableOpacity onPress={() => {navigation.navigate('เลขบช')}}
+                <TouchableOpacity onPress={() => {navigation.navigate('เลขบช', money)}}
                     style={{
                         padding:15,
                         marginLeft:45,
@@ -163,7 +157,7 @@ const Transfer =({navigation})=>{
                 </TouchableOpacity>
                 </View>
                 <View>
-                <TouchableOpacity onPress={() => {navigation.navigate('เลขบช')}}
+                <TouchableOpacity onPress={() => {navigation.navigate('เลขบช', money)}}
                     style={{
                         padding:15,
                         marginLeft:45,
@@ -184,7 +178,7 @@ const Transfer =({navigation})=>{
                 </TouchableOpacity>
                 </View>
                 <View>
-                <TouchableOpacity onPress={() => {navigation.navigate('เลขบช')}}
+                <TouchableOpacity onPress={() => {navigation.navigate('เลขบช', money)}}
                     style={{
                         padding:15,
                         marginLeft:45,
@@ -214,7 +208,7 @@ const Transfer =({navigation})=>{
                  justifyContent:'center'}}
                  >
                 <View>
-                <TouchableOpacity onPress={() => {navigation.navigate('เลขบช')}}
+                <TouchableOpacity onPress={() => {navigation.navigate('เลขบช', money)}}
                     style={{
                         padding:15,
                         flexDirection:'row',
@@ -236,7 +230,7 @@ const Transfer =({navigation})=>{
                 </View>
                 </View>
                 <TouchableOpacity onPress={() => navigation.goBack()}>
-                  <View style={{bottom: -160,justifyContent: 'center', alignItems:'center', borderWidth:1, width: 200, height: 50, borderRadius: 50, backgroundColor: 'blue'}}>
+                  <View style={{bottom: -160,justifyContent: 'center', alignItems:'center', borderWidth:1, width: 200, height: 50, borderRadius: 50, backgroundColor: '#79AC78'}}>
                     <Text style={{color: 'white'}}>ย้อนกลับ</Text>
                   </View>
                 </TouchableOpacity>
@@ -244,7 +238,7 @@ const Transfer =({navigation})=>{
         )
     }
     return(
-        <SafeAreaView style={{flex: 1, alignItems:'center'}}>
+        <SafeAreaView style={{flex: 1, alignItems:'center', backgroundColor: 'white'}}>
             {renderbank()}
         </SafeAreaView>
     )
