@@ -5,12 +5,16 @@ import { View, Image, Text, StyleSheet, SafeAreaView, TouchableOpacity} from 're
 import { ScrollView , FlatList} from 'react-native';
 import axios from 'axios';
 import { YOURAPI } from '../../constants/editendpoint';
+import { TextInput } from 'react-native-gesture-handler';
+import filter from 'lodash.filter';
 
 const Home = () => {
   const navigation = useNavigation();
   const [selectedData, setSelectedData] = useState([]);
   const [dateData, setDateData] = useState([]);
   const [daydate, setDaydate] = useState("เลือกวันด้านล่าง")
+  const [searchQuery, setSearchQuery] = useState("")
+  const [fulldata, setFulldata] = useState([])
 
   useEffect(() => {
     axios.get(`http://${YOURAPI}/12datenext`)
@@ -32,6 +36,7 @@ const Home = () => {
         .then(responses => {
           const workData = responses.map(response => response.data);
           setSelectedData(workData);
+          setFulldata(workData)
         })
         .catch(error => {
           console.error('Error fetching work data:', error);
@@ -42,6 +47,22 @@ const Home = () => {
       });
   }
 
+  const handleSearch = (text) => {
+    setSearchQuery(text)
+    const formattedQuery = text.toLowerCase()
+    const filteredData = filter(fulldata, (job) => {
+      return contains(job, formattedQuery)
+    })
+    setSelectedData(filteredData)
+  }
+  const contains = ({name, type_of_work}, text) => {
+    if (
+      name.includes(text) || type_of_work.includes(text)
+    ){
+      return true
+    }
+    return false
+  }
   return (
     <SafeAreaView style={{backgroundColor: 'white', flex: 1}}>
       <FlatList
@@ -62,7 +83,7 @@ const Home = () => {
             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
               {dateData.map(day => (
                   <TouchableOpacity key={day} onPress={() => {newData(day[0])}}>
-                    <View style={{flexDirection: 'row', marginHorizontal: 5,}}>
+                    <View style={{flexDirection: 'row', marginHorizontal: 5, marginBottom: 5}}>
                       <View style={styles.cicleView}>
                         <Text style={styles.textincircle}>{day[1].slice(0, 3)}</Text>
                         <Text style={styles.textincircle}>{day[0].slice(8,10)}</Text>
@@ -70,7 +91,14 @@ const Home = () => {
                     </View>
                   </TouchableOpacity>
               ))}
-              </ScrollView>
+            </ScrollView>
+            <TextInput placeholder='ค้นหาชื่อร้าน หรือ ค้นหาตำแหน่งงาน' clearButtonMode='always'
+            style={{paddingHorizontal: 20, paddingVertical: 15, borderColor: '#ccc', borderWidth: 1, borderRadius: 8, marginHorizontal: 10}}
+            autoCorrect={false}
+            autoCapitalize='none'
+            value={searchQuery}
+            onChangeText={text => handleSearch(text)}
+            ></TextInput>
           </>
         }
         renderItem={({ item }) => (
@@ -86,18 +114,19 @@ const Home = () => {
                   <Image 
                     source={{uri : item.image}} 
                     style={{flex: 1, height: null, width: null}}
-                    resizeMode='contain'
                   />
                 </View>
                 <View style={{margin: 10,width: 275, paddingHorizontal: 5}}>
                   <Text style={{fontSize: 20, fontWeight: '500'}}>{item.name}</Text>
                   <Text style={{fontSize: 17}}>เวลาทำงาน : {item.start_time} - {item.end_time}</Text>
-                  <View style={{alignItems: 'center',flexDirection: 'row', borderWidth: 1, width: 89, height: 63, borderRadius: 20, marginTop: 5, padding: 5, backgroundColor: '#79AC78', borderColor: '#B0D9B1'}}>
-                    <Text style={{position: 'relative', fontSize: 20, fontWeight: '600', color: '#ffffff'}}>{item.hourly_income}</Text>
-                    <View style={{position: 'relative', marginLeft: 2}}>
-                      <Text>เครดิต{'\n'}/ชั่วโมง</Text>
+                  <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <View style={{alignItems: 'center',flexDirection: 'row', borderWidth: 1, width: 80, height: 63, borderRadius: 20, marginTop: 5, padding: 5, backgroundColor: '#79AC78', borderColor: '#B0D9B1'}}>
+                      <Text style={{position: 'relative', fontSize: 20, fontWeight: '600', color: '#ffffff'}}>{item.hourly_income}</Text>
+                      <View style={{position: 'relative', marginLeft: 2}}>
+                        <Text>เครดิต{'\n'}/ชั่วโมง</Text>
+                      </View>
                     </View>
-                    <View style={{borderRadius: 20, height: 40, width: 120, borderWidth: 1, marginLeft: 15, padding: 5, alignItems: 'center', justifyContent: 'center', backgroundColor: '#79AC78', borderColor: '#B0D9B1'}}>
+                    <View style={{borderRadius: 20, height: 40, width: 120, borderWidth: 1, padding: 5, alignItems: 'center', justifyContent: 'center', backgroundColor: '#79AC78', borderColor: '#B0D9B1'}}>
                       <Text style={{color: 'white'}}>{item.type_of_work}</Text>
                     </View>
                   </View>
