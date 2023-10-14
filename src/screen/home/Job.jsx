@@ -1,7 +1,7 @@
 import { Text, View, SafeAreaView, Image, TouchableOpacity} from 'react-native'
 import React, { useContext, useEffect, useState } from 'react'
 import {FlatList} from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { Authcontext } from '../../context/Authcontext';
 import axios from 'axios';
 import { YOURAPI } from '../../constants/editendpoint';
@@ -14,35 +14,26 @@ export default function Job() {
   const {userInfo} = useContext(Authcontext)
   const [selectedData, setSelectedData] = useState([]);
 
-
-  useEffect(() =>{
-    try {
-      axios.get(`http://${YOURAPI}/users/${userInfo.user_id}/works`)
-        .then((res) => {
-          Promise.all(res.data.work_list.map(work_id => 
-            axios.get(`http://${YOURAPI}/users/${userInfo.user_id}/works/${work_id}`)
-          ))
-          .then(responses => {
-            const workData = responses.map(response => response.data);
-            setSelectedData(workData);
-          })
-          .catch(error => {
-            if (error.response && error.response.status === 400) {
-              setSelectedData([]); 
-            }
-          });
-        })
-        .catch(error => {
+  useFocusEffect(
+    React.useCallback(() => {
+      const fetchData = async () => {
+        try {
+          const response = await axios.get(`http://${YOURAPI}/users/${userInfo.user_id}/works`);
+          const workList = response.data.work_list;
+          const promises = workList.map(work_id => axios.get(`http://${YOURAPI}/users/${userInfo.user_id}/works/${work_id}`));
+          const responses = await Promise.all(promises);
+          const workData = responses.map(response => response.data);
+          setSelectedData(workData);
+        } catch (error) {
           if (error.response && error.response.status === 400) {
             setSelectedData([]);
           }
-        });
-    } catch (error) {
-      if (error.response && error.response.status === 400) {
-        setSelectedData([]); 
-      }
-    }
-  }, []);
+        }
+      };
+      fetchData();
+    }, [userInfo.user_id])
+);
+
   
 
   const getStatusColor = (status) => {
