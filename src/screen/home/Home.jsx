@@ -127,7 +127,28 @@ const Home = () => {
                       </View>
                     </View>
                     <View style={{borderRadius: 20, height: 40, width: 120, borderWidth: 1, padding: 5, alignItems: 'center', justifyContent: 'center', backgroundColor: '#79AC78', borderColor: '#B0D9B1', marginLeft: 5}}>
-                      <Text style={{color: 'white'}}>{item.type_of_work}</Text>
+                      <Text style={{color: 'white'}}>
+                      {(() => {
+                          switch(item.type_of_work) {
+                            case 'type1':
+                              return 'พนักงานเสิร์ฟ';
+                            case 'type2':
+                              return 'พนักงานทำความสะอาด';
+                            case 'type3':
+                              return 'ผู้ช่วยเชฟ';
+                            case 'type4':
+                              return 'พนักงานต้อนรับ';
+                            case 'type5':
+                              return 'พนักงานล้างจาน';
+                            case 'type6':
+                              return 'พนักงานส่งอาหาร';
+                            case 'type7':
+                              return 'พนักงานครัวร้อน';
+                            default:
+                              return item.type_of_work;
+                          }
+                        })()}
+                      </Text>
                     </View>
                   </View>
                 </View>

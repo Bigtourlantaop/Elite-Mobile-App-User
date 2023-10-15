@@ -33,8 +33,8 @@ const Headertab = () =>{
               style={{ marginRight: 15 }}
             >
               <Image
-                source={require('../assets/image/Filtericon.png')}
-                style={{ width: 30, height: 30 , opacity: 0.67}}
+                source={require('../assets/image/Interest.png')}
+                style={{ width: 30, height: 30}}
                 resizeMode='contain'
               />
             </TouchableOpacity>
