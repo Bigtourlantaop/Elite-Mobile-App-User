@@ -41,7 +41,26 @@ const Jobstatus = ({ route }) => {
         <View style={{padding: 5, width: 175}}>
           <Text style = {{fontSize : 25}}>{name}</Text>
           <Text>{start_time} - {end_time}</Text>
-          <Text style ={{color: 'red' }}>{type_of_work}</Text>
+          <Text style={{color : 'red'}}>ตำแหน่ง : {(() => {
+              switch(type_of_work) {
+                case 'type1':
+                  return 'พนักงานเสิร์ฟ';
+                case 'type2':
+                  return 'พนักงานทำความสะอาด';
+                case 'type3':
+                  return 'ผู้ช่วยเชฟ';
+                case 'type4':
+                  return 'พนักงานต้อนรับ';
+                case 'type5':
+                  return 'พนักงานล้างจาน';
+                case 'type6':
+                  return 'พนักงานส่งอาหาร';
+                case 'type7':
+                  return 'พนักงานครัวร้อน';
+                default:
+                  return type_of_work;
+              }
+            })()}</Text>
           <Text>{credit} เครดิต/ชั่วโมง</Text>
         </View>
       </View>

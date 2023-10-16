@@ -48,11 +48,11 @@ export default function Profile({navigation}) {
         <View style={{alignItems:'center'}}>
           <Text style={{fontSize: 30, color:'#000000', fontWeight:'500'}}>{data.first_name} {data.last_name}</Text>
           <View style={{ alignItems:'center',flexDirection: 'row', marginTop: 10}}>
-            <Image source={data.point >= 25 ? require('../../assets/image/StarOutline.png') : require('../../assets/image/Star.png')} style={{height:40, width:40}}></Image>
-            <Image source={data.point >= 50 ? require('../../assets/image/StarOutline.png') : require('../../assets/image/Star.png')} style={{height:40, width:40}}></Image>
-            <Image source={data.point >= 100 ? require('../../assets/image/StarOutline.png') : require('../../assets/image/Star.png')} style={{height:40, width:40}}></Image>
-            <Image source={data.point >= 150 ? require('../../assets/image/StarOutline.png') : require('../../assets/image/Star.png')} style={{height:40, width:40}}></Image>
-            <Image source={data.point >= 200 ? require('../../assets/image/StarOutline.png') : require('../../assets/image/Star.png')} style={{height:40, width:40}}></Image>
+            <Image source={data.point >= 1 ? require('../../assets/image/StarOutline.png') : require('../../assets/image/Star.png')} style={{height:40, width:40}}></Image>
+            <Image source={data.point >= 2 ? require('../../assets/image/StarOutline.png') : require('../../assets/image/Star.png')} style={{height:40, width:40}}></Image>
+            <Image source={data.point >= 3 ? require('../../assets/image/StarOutline.png') : require('../../assets/image/Star.png')} style={{height:40, width:40}}></Image>
+            <Image source={data.point >= 4 ? require('../../assets/image/StarOutline.png') : require('../../assets/image/Star.png')} style={{height:40, width:40}}></Image>
+            <Image source={data.point >= 5 ? require('../../assets/image/StarOutline.png') : require('../../assets/image/Star.png')} style={{height:40, width:40}}></Image>
             <Text style={{marginLeft:20, fontSize: 20, color:'#000000', fontWeight:'400'}}>คะแนน {data.point}</Text>
           </View>
         </View>
@@ -84,13 +84,9 @@ export default function Profile({navigation}) {
           <Text style={{color: '#176B87', fontSize: 17}}>LineId :  </Text>
           <Text style={{color:'#000000', fontSize: 17}}>{data.line_id}</Text>
         </View>
-        <View style={{marginTop: 15, marginHorizontal:25}}>
-          <Text style={{color: '#176B87', fontSize: 17}}>ที่อยู่ปัจจุบัน</Text>
-          <View style={{borderWidth: 10, alignItems: 'center', margin: 15, borderColor: '#EEEEEE'}}>
-            <Image source={require('../../assets/image/Maps.png')} style={{width: '100%', height:250, margin: 15}}></Image>
-            <View style={{flexDirection: 'row'}}>
-            </View>
-          </View>
+        <View style={{flexDirection: 'row',marginTop: 15, marginHorizontal:25}}>
+          <Text style={{color: '#176B87', fontSize: 17}}>ที่อยู่ปัจจุบัน : </Text>
+          <Text style={{color:'#000000', fontSize: 17}}>{data.address}</Text>
         </View>
         
       </ScrollView>

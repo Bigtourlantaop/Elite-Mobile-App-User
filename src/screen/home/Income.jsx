@@ -17,8 +17,8 @@ const Income = ({ navigation }) => {
         try {
           const response = await axios.get(`http://${YOURAPI}/users/${userInfo.user_id}`);
           setmoney(response.data.credit);
-          const Listex = await axios.get(`http://${YOURAPI}/users/${userInfo.user_id}/money_exchange`)
-          const dataListex = Listex.data
+          const Listex = await axios.get(`http://${YOURAPI}/users/${userInfo.user_id}/money_exchange`);
+          const dataListex = Listex.data;
           const promises = dataListex.map(id => axios.get(`http://${YOURAPI}/money_exchange/${id}`));
           const responses = await Promise.all(promises);
           const mylistex = responses.map(res => res.data);
@@ -27,9 +27,14 @@ const Income = ({ navigation }) => {
           console.error('Error', error);
         }
       };
-      fetchData();
-    }, [userInfo.user_id])
+      fetchData(); 
+      const interval = setInterval(() => {
+        fetchData(); 
+      }, 3000);
+      return () => clearInterval(interval); 
+        }, [userInfo.user_id])
   );
+  
   
 
   return (
@@ -61,7 +66,11 @@ const Income = ({ navigation }) => {
                 <Text>{item.date.slice(11, 19)}</Text>
               </View>
               <View style={{marginRight: 20}}>
-                <Text>{item.credit?.toLocaleString() || ""}</Text>
+                <Text style={(item.credit >= 0 ? {color: 'black'} : {color : 'red'})}>{
+                  item.credit?.toLocaleString() 
+                  ? (item.credit >= 0 ? `+ ${item.credit.toLocaleString()}` : `- ${Math.abs(item.credit).toLocaleString()}`)
+                  : ""
+                }</Text>
               </View>
             </View>
           )}

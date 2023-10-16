@@ -24,11 +24,16 @@ export default function Notification() {
           if (error.response && error.response.status === 400) {
             setSelectedData([]);
           }
-      }
-    };
-    fetchData();
+        }
+      };
+      fetchData(); 
+      const interval = setInterval(() => {
+        fetchData(); 
+      }, 3000);
+      return () => clearInterval(interval); 
     }, [userInfo.user_id])
   );
+  
 
 
   return (

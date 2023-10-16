@@ -81,7 +81,26 @@ export default function Job() {
                 <View style={{width: 200, marginLeft: 5}}>
                   <Text style={{fontSize: 20, fontWeight: '500'}}>{item.work_detail.name}</Text>
                   <Text style={{}}>วันทำงาน : {item.work_detail.work_date}</Text>
-                  <Text style={{}}>ตำแหน่ง : {item.work_detail.type_of_work}</Text>
+                  <Text style={{}}>ตำแหน่ง : {(() => {
+                          switch(item.work_detail.type_of_work) {
+                            case 'type1':
+                              return 'พนักงานเสิร์ฟ';
+                            case 'type2':
+                              return 'พนักงานทำความสะอาด';
+                            case 'type3':
+                              return 'ผู้ช่วยเชฟ';
+                            case 'type4':
+                              return 'พนักงานต้อนรับ';
+                            case 'type5':
+                              return 'พนักงานล้างจาน';
+                            case 'type6':
+                              return 'พนักงานส่งอาหาร';
+                            case 'type7':
+                              return 'พนักงานครัวร้อน';
+                            default:
+                              return item.work_detail.type_of_work;
+                          }
+                        })()}</Text>
                 </View>
               </View>
               <View style={{flexDirection:'column', alignItems:'center'}}>

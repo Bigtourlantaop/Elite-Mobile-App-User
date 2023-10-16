@@ -103,11 +103,6 @@ const Edit = ({route}) => {
                   <Text>ย้อนกลับ</Text>
                 </TouchableOpacity>
               </View>
-            <TouchableOpacity onPress={() => {navigation.navigate('resume')}}>
-              <View style={{marginLeft: 10, marginTop:20}}>
-                <Text style={{color: '#000000'}}>เพิ่มเรซูเม</Text>
-              </View>
-            </TouchableOpacity>
           </View>
           <View style={{alignItems:'center', marginTop: 20}}>
             <TouchableOpacity onPress={() => {choseImage()}}>
@@ -228,15 +223,14 @@ const Edit = ({route}) => {
             value={Data.line_id}
             onChangeText={text => handleInputChange('line_id', text)}></TextInput>
           </View>
-          <View style={{marginVertical: 15}}>
-            <Text style={{fontSize: 15}}>ที่อยู่ปัจจุบัน</Text>
-            <View style={{borderWidth: 10, alignItems: 'center', margin: 15, borderColor: '#EEEEEE'}}>
-              <Image source={require('../../assets/image/Maps.png')} style={{width: '100%', height:250, margin: 15}}></Image>
-              <View style={{flexDirection: 'row'}}>
-                <Text style={{flexGrow:1}}>แก้ไข</Text>
-                <Text>ImgGo</Text>
-              </View>
-            </View>
+          <View style={{alignItems: 'center',marginVertical: 15, flexDirection: 'row'}}>
+            <Text style={{fontSize: 17, marginRight: 10}}>ที่อยู่ปัจจุบัน</Text>
+            <TextInput 
+            placeholder='ที่อยู่' 
+            autoCorrect= {false} 
+            style={{fontSize:15, borderBottomWidth: 1, height: 30, width: 300}}
+            value={Data.address}
+            onChangeText={text => handleInputChange('address', text)}></TextInput>
           </View>
           <TouchableOpacity onPress={handleFormSubmit} style={styles.Savebut}>
             <Text style={{color: '#ffffff'}}>บันทึก</Text>

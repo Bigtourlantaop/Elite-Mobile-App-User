@@ -36,7 +36,7 @@ const Home = () => {
         .then(responses => {
           const workData = responses.map(response => response.data);
           setSelectedData(workData);
-          setFulldata(workData)
+          setFulldata(workData);
         })
         .catch(error => {
           console.error('Error fetching work data:', error);
@@ -46,6 +46,14 @@ const Home = () => {
         console.error('Error', e);
       });
   }
+  useEffect(() => {
+    newData(chose); 
+    const interval = setInterval(() => {
+      newData(chose); 
+    }, 3000);
+    return () => clearInterval(interval); 
+  }, [chose]);
+  
 
   const handleSearch = (text) => {
     setSearchQuery(text)
