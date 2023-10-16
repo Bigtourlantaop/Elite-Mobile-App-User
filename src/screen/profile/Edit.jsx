@@ -175,7 +175,7 @@ const Edit = ({route}) => {
             open={open}
             date={date}
             mode='date'
-            maximumDate={new Date('2023-12-31')}
+            maximumDate={new Date()}
             minimumDate={new Date('1873-12-31')}
             onConfirm={(date) => {
               setOpen(false);

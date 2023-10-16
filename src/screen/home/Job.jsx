@@ -30,9 +30,15 @@ export default function Job() {
           }
         }
       };
-      fetchData();
-    }, [userInfo.user_id])
-);
+      fetchData(); 
+      const interval = setInterval(() => {
+        fetchData(); 
+      }, 3000);
+  
+      return () => clearInterval(interval);
+        }, [userInfo.user_id])
+  );
+  
 
   
 
