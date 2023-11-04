@@ -46,13 +46,6 @@ const Home = () => {
         console.error('Error', e);
       });
   }
-  useEffect(() => {
-    newData(chose); 
-    const interval = setInterval(() => {
-      newData(chose); 
-    }, 3000);
-    return () => clearInterval(interval); 
-  }, [chose]);
   
 
   const handleSearch = (text) => {

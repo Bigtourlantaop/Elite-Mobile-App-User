@@ -29,7 +29,6 @@ const Jobdetail = ({ route }) => {
       setRec_data(res.data)
     })
   }, [])
-  console.log(rec_data);
   return (
   <View style={{flex: 1, backgroundColor: 'white'}}>
     <ScrollView style={{marginBottom: 60}}>

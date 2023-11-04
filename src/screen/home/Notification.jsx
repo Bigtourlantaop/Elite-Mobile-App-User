@@ -18,7 +18,6 @@ export default function Notification() {
           const promises = notifications.map(noti_id => axios.get(`http://${YOURAPI}/users/noti/${noti_id}`));
           const responses = await Promise.all(promises);
           const workData = responses.map(response => response.data);
-          console.log(workData);
           setSelectedData(workData);
         } catch (error) {
           if (error.response && error.response.status === 400) {

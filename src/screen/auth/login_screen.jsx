@@ -6,7 +6,7 @@ const Loginpage = ({navigation}) => {
     const [email, setEmail] = useState(null)
     const [pw, setPw] = useState(null)
 
-    const {login} = useContext(Authcontext)
+    const {login, state} = useContext(Authcontext)
     return (
         <ImageBackground source={require('../../assets/image/Background_Login.png')} style={{flex:1, justifyContent:'center'}}>
             <View style={{backgroundColor:'white', margin:35, borderRadius:30, }}>
@@ -29,6 +29,14 @@ const Loginpage = ({navigation}) => {
                     value={pw}
                     onChangeText={text => setPw(text)}
                     />
+                    {state === 0 ? (
+                    <View style={{alignItems: 'center'}}>
+                        <Text style = {{color: 'red', fontSize: 20}}>Username or Password</Text>
+                        <Text style= {{color: 'red', fontSize: 20}}>ไม่ถูกต้อง</Text>
+                    </View>) : (
+                        <>
+                        </>
+                    )}
                     <TouchableOpacity onPress={() => {login(email, pw )}} style={styles.loginbut}>
                         <Text style={{color: '#ffffff'}}>Login</Text>
                     </TouchableOpacity>

@@ -12,7 +12,6 @@ const Filter = ({navigation}) => {
     axios.get(`http://${YOURAPI}/users/${userInfo.user_id}`)
     .then(res => {
       const mydata = res.data.field_of_interested
-      console.log(mydata);
       setState(mydata)
     })
   }, [])
@@ -20,7 +19,6 @@ const Filter = ({navigation}) => {
   const handlePress = () => {
     axios.patch(`http://${YOURAPI}/users/${userInfo.user_id}/update_field_of_interested`, state)
     .then(res => {
-      console.log(res.data)
       navigation.goBack()
     })
   }

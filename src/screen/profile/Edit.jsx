@@ -11,9 +11,9 @@ import { YOURAPI } from '../../constants/editendpoint';
 
 const Edit = ({route}) => {
   const navigation = useNavigation()
-  const [date, setDate] = useState(new Date())
-  const [open, setOpen] = useState(false)
-  const [doblabel, setDoblabel] = useState('Date of Birth')
+  const [date, setDate] = useState(new Date());
+  const [open, setOpen] = useState(false);
+  const [doblabel, setDoblabel] = useState('คลิกเพื่อเลือก');
   const [selectImage, setselectImage] = useState(null)
   const {userInfo} = useContext(Authcontext)
   const initialFormData= route.params
@@ -23,7 +23,6 @@ const Edit = ({route}) => {
     if (name === 'age'){
       value = parseInt(value);
     }
-    console.log(Data)
     setData({
       ...Data,
       [name]: value
@@ -180,8 +179,13 @@ const Edit = ({route}) => {
             onConfirm={(date) => {
               setOpen(false);
               setDate(date);
-              setDoblabel(date.toDateString());
-              handleDateChange(date.toISOString());
+              const mydate = date.toDateString();
+              setDoblabel(mydate);
+              const year = date.getFullYear();
+              const month = String(date.getMonth() + 1).padStart(2, '0');
+              const day = String(date.getDate()).padStart(2, '0');
+              const test = `${year}-${month}-${day}`
+              handleDateChange(test);
             }}
             onCancel={() => {
               setOpen(false)

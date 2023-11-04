@@ -55,7 +55,6 @@ export default function Job() {
     }
   };
 
-  console.log(selectedData);
   return (
     <SafeAreaView style={{backgroundColor: 'white', flex:1}}>
       <FlatList
