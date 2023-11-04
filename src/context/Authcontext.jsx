@@ -13,7 +13,7 @@ export const AuthProvider = ({children}) => {
 
     const login = (username, password) => {
         setIsLoading(true)
-        axios.post(`http://${YOURAPI}/users/login`, {
+        axios.patch(`http://${YOURAPI}/users/login`, {
             username,
             password
         })
