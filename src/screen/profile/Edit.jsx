@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Image, SafeAreaView, ImageBackground, TextInput, ScrollView, StyleSheet, Alert, TouchableOpacityBase} from 'react-native'
+import { View, Text, TouchableOpacity, Image, SafeAreaView, ImageBackground, TextInput, ScrollView, StyleSheet, Alert, TouchableOpacityBase, KeyboardAvoidingView} from 'react-native'
 import {React, useState, useContext} from 'react'
 import DropDownsex from '../../components/DropdownSex'
 import DatePicker from 'react-native-date-picker'
@@ -93,155 +93,157 @@ const Edit = ({route}) => {
   }
 
   return (
-    <View style={{flex: 1, backgroundColor: 'white'}}>
-      <SafeAreaView style={{flex:1, marginHorizontal: 20}}>
-        <ScrollView showsVerticalScrollIndicator = {false}>
-          <View style={{flexDirection: 'row'}}>
-              <View style={{marginTop:20, flexGrow: 2}}>
-                <TouchableOpacity onPress={() => {navigation.goBack()}}>
-                  <Text>ย้อนกลับ</Text>
-                </TouchableOpacity>
-              </View>
-          </View>
-          <View style={{alignItems:'center', marginTop: 20}}>
-            <TouchableOpacity onPress={() => {choseImage()}}>
-              <ImageBackground 
-                source={selectImage ? {uri:selectImage} : require('../../assets/image/ProfileIcon.png')}
-                style={{
-                  height: 135,
-                  width: 135,
-                  opacity: 0.4,
-                  borderRadius: 87.5, 
-                  overflow: 'hidden' 
-                }}
-                resizeMode='cover'
-              >
-                <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-                  <Image source={require('../../assets/image/camera.png')} style={{height: 50, width: 100}} resizeMode='contain'></Image>
+    <KeyboardAvoidingView style={{flex: 1}}enabled={true} behavior={'padding'}>
+      <View style={{flex: 1, backgroundColor: 'white'}}>
+        <SafeAreaView style={{flex:1, marginHorizontal: 20}}>
+          <ScrollView showsVerticalScrollIndicator = {false}>
+            <View style={{flexDirection: 'row'}}>
+                <View style={{marginTop:20, flexGrow: 2}}>
+                  <TouchableOpacity onPress={() => {navigation.goBack()}}>
+                    <Text>ย้อนกลับ</Text>
+                  </TouchableOpacity>
                 </View>
-              </ImageBackground>
-            </TouchableOpacity>
-          </View>
-          <View style={{alignItems: 'center',marginVertical: 15, flexDirection: 'row'}}>
-            <Text style={{fontSize: 17, marginRight: 10}}>First Name</Text>
-            <Image source={require('../../assets/image/FooterIcon/People.png')} style={{height:30, width:40, marginRight: 5}}></Image>
-            <TextInput 
-            placeholder='First Name' 
-            autoCorrect= {false}
-            style={{fontSize:15, borderBottomWidth: 1, height: 30, width: 250}}
-            value={Data.first_name} 
-            onChangeText={text => handleInputChange('first_name', text)}></TextInput>
-          </View>
-          <View style={{alignItems: 'center',marginVertical: 15, flexDirection: 'row'}}>
-            <Text style={{fontSize: 17, marginRight: 10}}>Last Name</Text>
-            <Image source={require('../../assets/image/FooterIcon/People.png')} style={{height:30, width:40, marginRight: 5}}></Image>
-            <TextInput 
-            placeholder='Last Name' 
-            autoCorrect= {false} 
-            style={{fontSize:15, borderBottomWidth: 1, height: 30, width: 250}}
-            value={Data.last_name}
-            onChangeText={text => handleInputChange('last_name', text)}></TextInput>
-          </View>
-          <View style={{alignItems: 'center',marginVertical: 15, flexDirection: 'row'}}>
-            <Text style={{fontSize: 17, marginRight: 10}}>Nick Name</Text>
-            <Image source={require('../../assets/image/FooterIcon/People.png')} style={{height:30, width:40, marginRight: 5}}></Image>
-            <TextInput 
-            placeholder='Nickname' 
-            autoCorrect= {false} 
-            style={{fontSize:15, borderBottomWidth: 1, height: 30, width: 250}}
-            value={Data.nick_name}
-            onChangeText={text => handleInputChange('nick_name', text)}></TextInput>
-          </View>
-          <View style={{alignItems: 'center',marginVertical: 15, flexDirection: 'row'}}>
-            <Text style={{fontSize: 17, marginRight: 10}}>Telephone</Text>
-            <Image source={require('../../assets/image/PhoneIcon.png')} style={{height:30, width:40, marginRight: 5}}></Image>
-            <TextInput 
-            placeholder='Phone' 
-            autoCorrect= {false} 
-            style={{fontSize:15, borderBottomWidth: 1, height: 30, width: 250}} 
-            keyboardType='number-pad'
-            value={Data.tel}
-            onChangeText={text => handleInputChange('tel', text)}></TextInput>
-          </View>
-          <View style={{height: 45,borderBottomWidth: 1,marginVertical: 15,alignItems: 'center',flexDirection: 'row'}}>
-            <Image source={require('../../assets/image/Calender.png')} style={{height:35, width:35, marginRight: 5}}></Image>
-            <TouchableOpacity onPress={() => setOpen(true)}>
-              <Text style={{fontSize: 15}}>{doblabel}</Text>
-            </TouchableOpacity>
-          </View>
-          <DatePicker
-            modal
-            open={open}
-            date={date}
-            mode='date'
-            maximumDate={new Date()}
-            minimumDate={new Date('1873-12-31')}
-            onConfirm={(date) => {
-              setOpen(false);
-              setDate(date);
-              const mydate = date.toDateString();
-              setDoblabel(mydate);
-              const year = date.getFullYear();
-              const month = String(date.getMonth() + 1).padStart(2, '0');
-              const day = String(date.getDate()).padStart(2, '0');
-              const test = `${year}-${month}-${day}`
-              handleDateChange(test);
-            }}
-            onCancel={() => {
-              setOpen(false)
-            }}
-          />
-          <View style={{flexDirection:'row', alignItems: 'center'}}>
-            <View style={{width: '40%'}}>
-              <Text style={{fontSize: 17}}>Sex</Text>
-              <DropDownsex 
-              onValueChange={handleGenderChange}
-              value={Data.gender}>
-              </DropDownsex>
             </View>
-            <View style={{width: '60%'}}>
-              <Text style={{fontSize: 17}}>Age(Chose Date of Birth)</Text>
-              <View style={styles.dropdown}>
-                <Text>{Data.age}</Text>
+            <View style={{alignItems:'center', marginTop: 20}}>
+              <TouchableOpacity onPress={() => {choseImage()}}>
+                <ImageBackground 
+                  source={selectImage ? {uri:selectImage} : require('../../assets/image/ProfileIcon.png')}
+                  style={{
+                    height: 135,
+                    width: 135,
+                    opacity: 0.4,
+                    borderRadius: 87.5, 
+                    overflow: 'hidden' 
+                  }}
+                  resizeMode='cover'
+                >
+                  <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                    <Image source={require('../../assets/image/camera.png')} style={{height: 50, width: 100}} resizeMode='contain'></Image>
+                  </View>
+                </ImageBackground>
+              </TouchableOpacity>
+            </View>
+            <View style={{alignItems: 'center',marginVertical: 15, flexDirection: 'row'}}>
+              <Text style={{fontSize: 17, marginRight: 10}}>First Name</Text>
+              <Image source={require('../../assets/image/FooterIcon/People.png')} style={{height:30, width:40, marginRight: 5}}></Image>
+              <TextInput 
+              placeholder='First Name' 
+              autoCorrect= {false}
+              style={{fontSize:15, borderBottomWidth: 1, height: 30, width: 250}}
+              value={Data.first_name} 
+              onChangeText={text => handleInputChange('first_name', text)}></TextInput>
+            </View>
+            <View style={{alignItems: 'center',marginVertical: 15, flexDirection: 'row'}}>
+              <Text style={{fontSize: 17, marginRight: 10}}>Last Name</Text>
+              <Image source={require('../../assets/image/FooterIcon/People.png')} style={{height:30, width:40, marginRight: 5}}></Image>
+              <TextInput 
+              placeholder='Last Name' 
+              autoCorrect= {false} 
+              style={{fontSize:15, borderBottomWidth: 1, height: 30, width: 250}}
+              value={Data.last_name}
+              onChangeText={text => handleInputChange('last_name', text)}></TextInput>
+            </View>
+            <View style={{alignItems: 'center',marginVertical: 15, flexDirection: 'row'}}>
+              <Text style={{fontSize: 17, marginRight: 10}}>Nick Name</Text>
+              <Image source={require('../../assets/image/FooterIcon/People.png')} style={{height:30, width:40, marginRight: 5}}></Image>
+              <TextInput 
+              placeholder='Nickname' 
+              autoCorrect= {false} 
+              style={{fontSize:15, borderBottomWidth: 1, height: 30, width: 250}}
+              value={Data.nick_name}
+              onChangeText={text => handleInputChange('nick_name', text)}></TextInput>
+            </View>
+            <View style={{alignItems: 'center',marginVertical: 15, flexDirection: 'row'}}>
+              <Text style={{fontSize: 17, marginRight: 10}}>Telephone</Text>
+              <Image source={require('../../assets/image/PhoneIcon.png')} style={{height:30, width:40, marginRight: 5}}></Image>
+              <TextInput 
+              placeholder='Phone' 
+              autoCorrect= {false} 
+              style={{fontSize:15, borderBottomWidth: 1, height: 30, width: 250}} 
+              keyboardType='number-pad'
+              value={Data.tel}
+              onChangeText={text => handleInputChange('tel', text)}></TextInput>
+            </View>
+            <View style={{height: 45,borderBottomWidth: 1,marginVertical: 15,alignItems: 'center',flexDirection: 'row'}}>
+              <Image source={require('../../assets/image/Calender.png')} style={{height:35, width:35, marginRight: 5}}></Image>
+              <TouchableOpacity onPress={() => setOpen(true)}>
+                <Text style={{fontSize: 15}}>{doblabel}</Text>
+              </TouchableOpacity>
+            </View>
+            <DatePicker
+              modal
+              open={open}
+              date={date}
+              mode='date'
+              maximumDate={new Date()}
+              minimumDate={new Date('1873-12-31')}
+              onConfirm={(date) => {
+                setOpen(false);
+                setDate(date);
+                const mydate = date.toDateString();
+                setDoblabel(mydate);
+                const year = date.getFullYear();
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const day = String(date.getDate()).padStart(2, '0');
+                const test = `${year}-${month}-${day}`
+                handleDateChange(test);
+              }}
+              onCancel={() => {
+                setOpen(false)
+              }}
+            />
+            <View style={{flexDirection:'row', alignItems: 'center'}}>
+              <View style={{width: '40%'}}>
+                <Text style={{fontSize: 17}}>Sex</Text>
+                <DropDownsex 
+                onValueChange={handleGenderChange}
+                value={Data.gender}>
+                </DropDownsex>
+              </View>
+              <View style={{width: '60%'}}>
+                <Text style={{fontSize: 17}}>Age(Chose Date of Birth)</Text>
+                <View style={styles.dropdown}>
+                  <Text>{Data.age}</Text>
+                </View>
               </View>
             </View>
-          </View>
-          <View style={{alignItems: 'center',marginVertical: 15, flexDirection: 'row'}}>
-            <Text style={{fontSize: 17, marginRight: 10}}>Email</Text>
-            <Image source={require('../../assets/image/Email.png')} style={{height:30, width:40, marginRight: 5}}></Image>
-            <TextInput 
-            placeholder='Email' 
-            autoCorrect= {false} 
-            style={{fontSize:15, borderBottomWidth: 1, height: 30, width: 300}} 
-            keyboardType='email-address'
-            value={Data.email}
-            onChangeText={text => handleInputChange('email', text)}></TextInput>
-          </View>
-          <View style={{alignItems: 'center',marginVertical: 15, flexDirection: 'row'}}>
-            <Text style={{fontSize: 17, marginRight: 10}}>Line Id</Text>
-            <Image source={require('../../assets/image/line.png')} style={{height:30, width:30, marginRight: 5}}></Image>
-            <TextInput 
-            placeholder='Line ID' 
-            autoCorrect= {false} 
-            style={{fontSize:15, borderBottomWidth: 1, height: 30, width: 300}}
-            value={Data.line_id}
-            onChangeText={text => handleInputChange('line_id', text)}></TextInput>
-          </View>
-          <View style={{alignItems: 'center',marginVertical: 15, flexDirection: 'row'}}>
-            <Text style={{fontSize: 17, marginRight: 10}}>ที่อยู่ปัจจุบัน</Text>
-            <TextInput 
-            placeholder='ที่อยู่' 
-            autoCorrect= {false} 
-            style={{fontSize:15, borderBottomWidth: 1, height: 30, width: 300}}
-            value={Data.address}
-            onChangeText={text => handleInputChange('address', text)}></TextInput>
-          </View>
-          <TouchableOpacity onPress={handleFormSubmit} style={styles.Savebut}>
-            <Text style={{color: '#ffffff'}}>บันทึก</Text>
-          </TouchableOpacity>
-        </ScrollView>
-      </SafeAreaView>
-    </View>
+            <View style={{alignItems: 'center',marginVertical: 15, flexDirection: 'row'}}>
+              <Text style={{fontSize: 17, marginRight: 10}}>Email</Text>
+              <Image source={require('../../assets/image/Email.png')} style={{height:30, width:40, marginRight: 5}}></Image>
+              <TextInput 
+              placeholder='Email' 
+              autoCorrect= {false} 
+              style={{fontSize:15, borderBottomWidth: 1, height: 30, width: 300}} 
+              keyboardType='email-address'
+              value={Data.email}
+              onChangeText={text => handleInputChange('email', text)}></TextInput>
+            </View>
+            <View style={{alignItems: 'center',marginVertical: 15, flexDirection: 'row'}}>
+              <Text style={{fontSize: 17, marginRight: 10}}>Line Id</Text>
+              <Image source={require('../../assets/image/line.png')} style={{height:30, width:30, marginRight: 5}}></Image>
+              <TextInput 
+              placeholder='Line ID' 
+              autoCorrect= {false} 
+              style={{fontSize:15, borderBottomWidth: 1, height: 30, width: 300}}
+              value={Data.line_id}
+              onChangeText={text => handleInputChange('line_id', text)}></TextInput>
+            </View>
+            <View style={{alignItems: 'center',marginVertical: 15, flexDirection: 'row'}}>
+              <Text style={{fontSize: 17, marginRight: 10}}>ที่อยู่ปัจจุบัน</Text>
+              <TextInput 
+              placeholder='ที่อยู่' 
+              autoCorrect= {false} 
+              style={{fontSize:15, borderBottomWidth: 1, height: 30, width: 300}}
+              value={Data.address}
+              onChangeText={text => handleInputChange('address', text)}></TextInput>
+            </View>
+            <TouchableOpacity onPress={handleFormSubmit} style={styles.Savebut}>
+              <Text style={{color: '#ffffff'}}>บันทึก</Text>
+            </TouchableOpacity>
+          </ScrollView>
+        </SafeAreaView>
+      </View>
+    </KeyboardAvoidingView>
   )
 }
 
