@@ -53,7 +53,7 @@ export default function Profile({navigation}) {
             <Image source={data.point >= 3 ? require('../../assets/image/StarOutline.png') : require('../../assets/image/Star.png')} style={{height:40, width:40}}></Image>
             <Image source={data.point >= 4 ? require('../../assets/image/StarOutline.png') : require('../../assets/image/Star.png')} style={{height:40, width:40}}></Image>
             <Image source={data.point >= 5 ? require('../../assets/image/StarOutline.png') : require('../../assets/image/Star.png')} style={{height:40, width:40}}></Image>
-            <Text style={{marginLeft:20, fontSize: 20, color:'#000000', fontWeight:'400'}}>คะแนน {data.point}</Text>
+            <Text style={{marginLeft:20, fontSize: 20, color:'#000000', fontWeight:'400'}}>คะแนน {(data.point !== undefined ? (data.point.toFixed(2)) : (""))}</Text>
           </View>
         </View>
         <View style={{flexDirection:'row', marginTop: 25, marginHorizontal:25}}>

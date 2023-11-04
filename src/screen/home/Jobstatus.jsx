@@ -4,7 +4,7 @@ import { View, Text, Image, Button, StyleSheet, ScrollView } from 'react-native'
 
 const Jobstatus = ({ route }) => {
   const Status = route.params.item.status
-  const { name, start_time, end_time, type_of_work, credit, state, color, image } = route.params.item.work_detail;
+  const {name, start_time, end_time, type_of_work, hourly_income, state, color, image } = route.params.item.work_detail;
   const myDetail = route.params.item.work_detail.work_description.detail
   const myQualification = route.params.item.work_detail.work_description.qualification
   const navigation = useNavigation();
@@ -61,17 +61,17 @@ const Jobstatus = ({ route }) => {
                   return type_of_work;
               }
             })()}</Text>
-          <Text>{credit} เครดิต/ชั่วโมง</Text>
+          <Text>{hourly_income} เครดิต/ชั่วโมง</Text>
         </View>
       </View>
       <View style={styles.textContainer}>
-        <Text style = {{fontSize : 19}}>รายละเอียดงาน</Text>
+        <Text style = {{fontSize : 19, color: 'white'}}>รายละเอียดงาน</Text>
         <View style={{marginLeft: 10, marginTop:5}}>
           <Text>{myDetail}</Text>
         </View>
       </View>
         <View style={styles.textContainer}>
-          <Text style = {{fontSize : 19}}>คุณสมบัติผู้สมัคร</Text>
+          <Text style = {{fontSize : 19, color: 'white'}}>คุณสมบัติผู้สมัคร</Text>
           <View style={{marginLeft: 10, marginTop:5}}>
             <Text>{myQualification}</Text>
           </View>
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     borderRadius:20
   },
   textContainer: {
-    backgroundColor: 'lightgrey',
+    backgroundColor: '#6A9C89',
     padding: 10,
     borderRadius: 10,
     marginBottom: 20,

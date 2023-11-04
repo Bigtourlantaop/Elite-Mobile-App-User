@@ -1,12 +1,13 @@
 
 import { useNavigation } from '@react-navigation/native';
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { View, Image, Text, StyleSheet, SafeAreaView, TouchableOpacity} from 'react-native';
 import { ScrollView , FlatList} from 'react-native';
 import axios from 'axios';
 import { YOURAPI } from '../../constants/editendpoint';
 import { TextInput } from 'react-native-gesture-handler';
 import filter from 'lodash.filter';
+import { Authcontext } from '../../context/Authcontext';
 
 const Home = () => {
   const navigation = useNavigation();
@@ -15,6 +16,7 @@ const Home = () => {
   const [daydate, setDaydate] = useState("เลือกวันด้านล่าง")
   const [searchQuery, setSearchQuery] = useState("")
   const [fulldata, setFulldata] = useState([])
+  const {userInfo} = useContext(Authcontext)
 
   useEffect(() => {
     axios.get(`http://${YOURAPI}/12datenext`)
@@ -28,7 +30,7 @@ const Home = () => {
 
   function newData(chose) {
     setDaydate(chose)
-    axios.get(`http://${YOURAPI}/work_date/${chose}`)
+    axios.get(`http://${YOURAPI}/users/${userInfo.user_id}/work_date/${chose}`)
       .then((res) => {
         Promise.all(res.data.work_list.map(_id => 
           axios.get(`http://${YOURAPI}/works/${_id}`)

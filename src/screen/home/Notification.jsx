@@ -32,8 +32,6 @@ export default function Notification() {
       return () => clearInterval(interval); 
     }, [userInfo.user_id])
   );
-  
-
 
   return (
     <SafeAreaView style={{backgroundColor: 'white', flex:1}}>
@@ -49,7 +47,7 @@ export default function Notification() {
         )}
         renderItem={({ item }) => (
           <View style={{flexDirection: 'column', margin:10, borderBottomWidth:1}}>
-            <Text style={{margin:5, color:'red'}}>{item.name}  ({item.date.slice(0,10)})</Text>
+            <Text style={{margin:5, color:'red'}}>วันทำงาน ({item.date.slice(0,10)})</Text>
             <Text style={{marginLeft: 20, marginBottom:8}}>{item.text}</Text>
           </View>
         )}
