@@ -65,7 +65,6 @@ const Register_Screen = ({navigation}) => {
       notification: [],
       feedback: {}
   })
-    console.log(Data);
 
     const isDataValid = (data) => {
       return data.username !== 'ชื่อผู้ใช้' &&  data.password !== 'รหัสผ่าน'
