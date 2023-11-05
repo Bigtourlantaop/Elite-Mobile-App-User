@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { ImageBackground, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { ImageBackground, KeyboardAvoidingView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { Authcontext } from "../../context/Authcontext";
 
 const Loginpage = ({navigation}) => {
@@ -8,6 +8,7 @@ const Loginpage = ({navigation}) => {
 
     const {login, state} = useContext(Authcontext)
     return (
+    <KeyboardAvoidingView style={{flex: 1}}enabled={true} behavior={'padding'}>
         <ImageBackground source={require('../../assets/image/Background_Login.png')} style={{flex:1, justifyContent:'center'}}>
             <View style={{backgroundColor:'white', margin:35, borderRadius:30, }}>
                 <View style={{paddingHorizontal:25}}>
@@ -48,6 +49,7 @@ const Loginpage = ({navigation}) => {
                 </View>
             </View>
         </ImageBackground>
+    </KeyboardAvoidingView>
     );
 }
 

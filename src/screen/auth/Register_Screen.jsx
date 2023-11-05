@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Image, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Image, KeyboardAvoidingView, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import DatePicker from "react-native-date-picker";
 import DropDownsex from "../../components/DropdownSex";
 import axios from "axios";
@@ -82,128 +82,132 @@ const Register_Screen = ({navigation}) => {
         console.error('Error sending data:', error);
       });
       } else {
-        alert('กรุณากรอกข้อมูลไม่ครบ');
+        alert('กรุณากรอกข้อมูลให้ครบ');
       }
     }
 
     return (
-        <SafeAreaView style={{flex:1, justifyContent:'center'}}>
-            <ScrollView showsVerticalScrollIndicator={false} style={{paddingHorizontal:25}}>
-              <View style={{alignItems:'center', margin: 40}}>
-                <Image source={require('../../assets/image/Worklife.png')} style={{}}></Image>
-              </View>
-              <Text style={{fontSize:50, color:'black', marginBottom:40}}>Register</Text>
-              <Text style={{fontSize: 15}}>UserName</Text>
-              <TextInput 
-              placeholder="Username" 
-              style={styles.input}
-              keyboardType="default"
-              autoCorrect= {false} 
-              secureTextEntry = {false} 
-              onChangeText={text => handleInputChange('username', text)}/>
-              <Text style={{fontSize: 15}}>Password</Text>
-              <TextInput 
-              placeholder="Password" 
-              style={styles.input} 
-              autoCorrect= {false} 
-              keyboardType="default"
-              onChangeText={text => handleInputChange('password', text)}/>
-              <Text style={{fontSize: 15}}>Firstname</Text>
-              <TextInput 
-              placeholder="First name" 
-              style={styles.input} 
-              autoCorrect= {false} 
-              keyboardType="default" 
-              onChangeText={text => handleInputChange('first_name', text)}/>
-              <Text style={{fontSize: 15}}>Lastname</Text>
-              <TextInput 
-              placeholder="Last name" 
-              style={styles.input} 
-              autoCorrect= {false} 
-              keyboardType="default" 
-              onChangeText={text => handleInputChange('last_name', text)}/>
-              <Text style={{fontSize: 15}}>Email</Text>
-              <TextInput 
-              placeholder="Email" 
-              style={styles.input} 
-              autoCorrect= {false} 
-              keyboardType="email-address" 
-              onChangeText={text => handleInputChange('email', text)}/>
-              <Text style={{fontSize: 15}}>Nickname</Text>
-              <TextInput 
-              placeholder="Nickname" 
-              style={styles.input} 
-              autoCorrect= {false} 
-              keyboardType="default" 
-              onChangeText={text => handleInputChange('nick_name', text)}/>
-              <Text style={{fontSize: 15}}>วันเกิด</Text>
-              <View style={styles.input1}>
-                <Image source={require('../../assets/image/Calender.png')} style={{height:30, width:30, marginRight: 5}}></Image>
-                <TouchableOpacity onPress={() => setOpen(true)}>
-                  <Text style={{fontSize: 15}}>{doblabel}</Text>
+      <KeyboardAvoidingView style={{flex: 1}}enabled={true} behavior={'padding'}>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <SafeAreaView style={{flex:1, justifyContent:'center'}}>
+              <ScrollView showsVerticalScrollIndicator={false} style={{paddingHorizontal:25}}>
+                <View style={{alignItems:'center', margin: 40}}>
+                  <Image source={require('../../assets/image/Worklife.png')} style={{}}></Image>
+                </View>
+                <Text style={{fontSize:50, color:'black', marginBottom:40}}>Register</Text>
+                <Text style={{fontSize: 15}}>UserName</Text>
+                <TextInput 
+                placeholder="Username" 
+                style={styles.input}
+                keyboardType="default"
+                autoCorrect= {false} 
+                secureTextEntry = {false} 
+                onChangeText={text => handleInputChange('username', text)}/>
+                <Text style={{fontSize: 15}}>Password</Text>
+                <TextInput 
+                placeholder="Password" 
+                style={styles.input} 
+                autoCorrect= {false} 
+                keyboardType="default"
+                onChangeText={text => handleInputChange('password', text)}/>
+                <Text style={{fontSize: 15}}>Firstname</Text>
+                <TextInput 
+                placeholder="First name" 
+                style={styles.input} 
+                autoCorrect= {false} 
+                keyboardType="default" 
+                onChangeText={text => handleInputChange('first_name', text)}/>
+                <Text style={{fontSize: 15}}>Lastname</Text>
+                <TextInput 
+                placeholder="Last name" 
+                style={styles.input} 
+                autoCorrect= {false} 
+                keyboardType="default" 
+                onChangeText={text => handleInputChange('last_name', text)}/>
+                <Text style={{fontSize: 15}}>Email</Text>
+                <TextInput 
+                placeholder="Email" 
+                style={styles.input} 
+                autoCorrect= {false} 
+                keyboardType="email-address" 
+                onChangeText={text => handleInputChange('email', text)}/>
+                <Text style={{fontSize: 15}}>Nickname</Text>
+                <TextInput 
+                placeholder="Nickname" 
+                style={styles.input} 
+                autoCorrect= {false} 
+                keyboardType="default" 
+                onChangeText={text => handleInputChange('nick_name', text)}/>
+                <Text style={{fontSize: 15}}>วันเกิด</Text>
+                <View style={styles.input1}>
+                  <Image source={require('../../assets/image/Calender.png')} style={{height:30, width:30, marginRight: 5}}></Image>
+                  <TouchableOpacity onPress={() => setOpen(true)}>
+                    <Text style={{fontSize: 15}}>{doblabel}</Text>
+                  </TouchableOpacity>
+                </View>
+                <DatePicker
+                  modal
+                  open={open}
+                  date={date}
+                  mode='date'
+                  maximumDate={new Date()}
+                  minimumDate={new Date('1873-12-31')}
+                  onConfirm={(date) => {
+                    setOpen(false);
+                    setDate(date);
+                    const mydate = date.toDateString();
+                    setDoblabel(mydate);
+                    const year = date.getFullYear();
+                    const month = String(date.getMonth() + 1).padStart(2, '0');
+                    const day = String(date.getDate()).padStart(2, '0');
+                    const test = `${year}-${month}-${day}`
+                    handleDateChange(test);
+                  }}
+                  onCancel={() => {
+                    setOpen(false)
+                  }}
+                />
+                <View style={{flexDirection: 'row', alignItems: 'center',}}>
+                  <Text style={{fontSize: 15}}>Sex</Text>
+                  <DropDownsex
+                  onValueChange={handleGenderChange}
+                  value={Data.gender}>
+                  </DropDownsex>
+                </View>
+                <Text style={{fontSize: 15}}>LineId</Text>
+                <TextInput 
+                placeholder="LineID" 
+                style={styles.input} 
+                autoCorrect= {false} 
+                keyboardType="default" 
+                onChangeText={text => handleInputChange('line_id', text)}/>
+                <Text style={{fontSize: 15}}>เบอร์โทร</Text>
+                <TextInput 
+                placeholder="เบอร์โทร" 
+                style={styles.input} 
+                autoCorrect= {false} 
+                keyboardType="number-pad"
+                onChangeText={text => handleInputChange('tel', text)}/>
+                <Text style={{fontSize: 15}}>ที่อยู่ปัจจุบัน</Text>
+                <TextInput 
+                placeholder="ที่อยู่" 
+                style={styles.input} 
+                autoCorrect= {false} 
+                keyboardType="default"
+                onChangeText={text => handleInputChange('address', text)}/>
+                <TouchableOpacity onPress={() => {handleFormSubmit()}} style={styles.RegisBut}>
+                  <Text style={{color: 'white', fontSize:23}}>Register</Text>
                 </TouchableOpacity>
-              </View>
-              <DatePicker
-                modal
-                open={open}
-                date={date}
-                mode='date'
-                maximumDate={new Date()}
-                minimumDate={new Date('1873-12-31')}
-                onConfirm={(date) => {
-                  setOpen(false);
-                  setDate(date);
-                  const mydate = date.toDateString();
-                  setDoblabel(mydate);
-                  const year = date.getFullYear();
-                  const month = String(date.getMonth() + 1).padStart(2, '0');
-                  const day = String(date.getDate()).padStart(2, '0');
-                  const test = `${year}-${month}-${day}`
-                  handleDateChange(test);
-                }}
-                onCancel={() => {
-                  setOpen(false)
-                }}
-              />
-              <View style={{flexDirection: 'row', alignItems: 'center',}}>
-                <Text style={{fontSize: 15}}>Sex</Text>
-                <DropDownsex
-                onValueChange={handleGenderChange}
-                value={Data.gender}>
-                </DropDownsex>
-              </View>
-              <Text style={{fontSize: 15}}>LineId</Text>
-              <TextInput 
-              placeholder="LineID" 
-              style={styles.input} 
-              autoCorrect= {false} 
-              keyboardType="default" 
-              onChangeText={text => handleInputChange('line_id', text)}/>
-              <Text style={{fontSize: 15}}>เบอร์โทร</Text>
-              <TextInput 
-              placeholder="เบอร์โทร" 
-              style={styles.input} 
-              autoCorrect= {false} 
-              keyboardType="number-pad"
-              onChangeText={text => handleInputChange('tel', text)}/>
-              <Text style={{fontSize: 15}}>ที่อยู่ปัจจุบัน</Text>
-              <TextInput 
-              placeholder="ที่อยู่" 
-              style={styles.input} 
-              autoCorrect= {false} 
-              keyboardType="default"
-              onChangeText={text => handleInputChange('address', text)}/>
-              <TouchableOpacity onPress={() => {handleFormSubmit()}} style={styles.RegisBut}>
-                <Text style={{color: 'white', fontSize:23}}>Register</Text>
-              </TouchableOpacity>
-              <View style = {{flexDirection: 'row', justifyContent:'center', marginTop: 20}}>
-                <Text>Already registered? </Text>
-                <TouchableOpacity onPress={() => {navigation.navigate('Login')}}>
-                    <Text style={{color:'blue', marginBottom: 25}}>Login</Text>
-                </TouchableOpacity>
-              </View>
-            </ScrollView>
-        </SafeAreaView>
+                <View style = {{flexDirection: 'row', justifyContent:'center', marginTop: 20}}>
+                  <Text>Already registered? </Text>
+                  <TouchableOpacity onPress={() => {navigation.navigate('Login')}}>
+                      <Text style={{color:'blue', marginBottom: 25}}>Login</Text>
+                  </TouchableOpacity>
+                </View>
+              </ScrollView>
+          </SafeAreaView>
+        </ScrollView>
+      </KeyboardAvoidingView>
     );
 }
 
