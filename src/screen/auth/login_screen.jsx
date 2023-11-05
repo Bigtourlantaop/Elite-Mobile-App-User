@@ -30,9 +30,8 @@ const Loginpage = ({navigation}) => {
                     onChangeText={text => setPw(text)}
                     />
                     {state === 0 ? (
-                    <View style={{alignItems: 'center'}}>
-                        <Text style = {{color: 'red', fontSize: 20}}>Username or Password</Text>
-                        <Text style= {{color: 'red', fontSize: 20}}>ไม่ถูกต้อง</Text>
+                    <View style={{alignSelf: 'baseline', marginLeft: 14}}>
+                        <Text style = {{color: 'red', fontSize: 15}}>Username หรือ Password ไม่ถูกต้อง</Text>
                     </View>) : (
                         <>
                         </>

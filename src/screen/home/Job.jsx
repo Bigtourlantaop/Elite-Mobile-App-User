@@ -44,14 +44,14 @@ export default function Job() {
 
   const getStatusColor = (status) => {
     switch (status) {
-      case 'กำลังทำ':
-        return 'green';
-      case 'รอ':
+      case 'Working':
         return '#E9B824';
-      case 'เสร็จ':
+      case 'Waiting':
+        return 'gray';
+      case 'Absent':
         return 'red';
       default:
-        return '#000000';
+        return 'green';
     }
   };
 
