@@ -18,6 +18,7 @@ const Forget_screen = ({navigation}) => {
         .catch(error => {
           console.error('PATCH error', error);
           setUsercolor('red')
+          setState1(0)
         });
       };
 
@@ -44,16 +45,6 @@ const Forget_screen = ({navigation}) => {
             <TouchableOpacity onPress={() => {forgot_user(name)}}>
                 <View style={styles.loginbut}>
                     <Text style={{fontSize:24, color:'#ffffff'}}>ยืนยัน</Text>
-                </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => {setState1(0), setUsercolor("red")}}>
-                <View style={styles.loginbut}>
-                    <Text style={{fontSize:24, color:'#ffffff'}}>change state</Text>
-                </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => {setState1(1), setUsercolor("black")}}>
-                <View style={styles.loginbut}>
-                    <Text style={{fontSize:24, color:'#ffffff'}}>change state</Text>
                 </View>
             </TouchableOpacity>
 
