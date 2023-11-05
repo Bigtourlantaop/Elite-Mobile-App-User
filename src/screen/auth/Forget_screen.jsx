@@ -1,6 +1,5 @@
-import React, { useContext, useState } from "react";
-import { SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View, Image } from "react-native";
-import { Authcontext } from "../../context/Authcontext";
+import React, { useState } from "react";
+import {StyleSheet, Text, TextInput, TouchableOpacity, View, Image, KeyboardAvoidingView, ScrollView, Alert } from "react-native";
 import axios from "axios";
 import { YOURAPI } from "../../constants/editendpoint";
 
@@ -16,15 +15,15 @@ const Forget_screen = ({navigation}) => {
             navigation.navigate('Login')
           })
         .catch(error => {
-          console.error('PATCH error', error);
           setUsercolor('red')
           setState1(0)
         });
       };
 
     return (
-        <SafeAreaView style={{flex:1 ,marginHorizontal:15}}>
-            <View style={{alignItems:'center', margin: 10}}>
+    <KeyboardAvoidingView style={{flex: 1}}enabled={true} behavior={'padding'}>
+        <ScrollView showsVerticalScrollIndicator = {false} style={{flex:1 ,marginHorizontal:15, marginVertical: 40}}>
+            <View style={{alignItems:'center', margin: 10, marginLeft: 60}}>
                 <Image source={require('../../assets/image/Forgotpass.png')} style={{width: 180,height: 180, resizeMode: 'stretch'}}></Image>
             </View>
             <View style={{alignItems:"left", marginTop:0, marginBottom: 20}}>
@@ -47,8 +46,8 @@ const Forget_screen = ({navigation}) => {
                     <Text style={{fontSize:24, color:'#ffffff'}}>ยืนยัน</Text>
                 </View>
             </TouchableOpacity>
-
-        </SafeAreaView>
+        </ScrollView>
+    </KeyboardAvoidingView>
 
     )
 }

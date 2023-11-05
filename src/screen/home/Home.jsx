@@ -49,7 +49,6 @@ const Home = () => {
       });
   }
   
-
   const handleSearch = (text) => {
     setSearchQuery(text)
     const formattedQuery = text.toLowerCase()
@@ -80,8 +79,11 @@ const Home = () => {
         )}
         ListHeaderComponent={
           <>
-            <View style={{margin:10, padding:5}}>
-              <Text style={{color:'#000000', fontSize:17}}>Day : {daydate}</Text>
+            <View style={{margin:10, padding:5, flexDirection: 'row'}}>
+              <Text style={{color:'#000000', fontSize:17, flexGrow: 2}}>Day : {daydate}</Text>
+              <TouchableOpacity onPress={() => {newData(daydate)}}>
+                <Image source={require('../../assets/image/Refresh.png')} style={{height: 30, width: 30}}></Image>
+              </TouchableOpacity>
             </View>
             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
               {dateData.map(day => (
@@ -129,7 +131,7 @@ const Home = () => {
                         <Text>เครดิต{'\n'}/ชั่วโมง</Text>
                       </View>
                     </View>
-                    <View style={{borderRadius: 20, height: 40, width: 120, borderWidth: 1, padding: 5, alignItems: 'center', justifyContent: 'center', backgroundColor: '#79AC78', borderColor: '#B0D9B1', marginLeft: 5}}>
+                    <View style={{borderRadius: 20, height: 40, width: 175, borderWidth: 1, padding: 5, alignItems: 'center', justifyContent: 'center', backgroundColor: '#79AC78', borderColor: '#B0D9B1', marginLeft: 5}}>
                       <Text style={{color: 'white'}}>
                       {(() => {
                           switch(item.type_of_work) {
